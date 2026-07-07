@@ -14,7 +14,7 @@ public class DataBase {
 				Properties props = LoadProperties();
 				String url = props.getProperty("dburl");
 				conn = DriverManager.getConnection(url,props);
-                                   System.out.println("Connection succesful!");
+				System.out.println("Connection succesful!");
 			}
 			catch(SQLException e){
 				throw new DbException(e.getMessage());
@@ -27,7 +27,7 @@ public class DataBase {
 		if(conn != null){
 			try{
 				conn.close();  
-                                   System.out.println("Connection closed");
+				System.out.println("Connection closed");
 			}
 			catch(SQLException e){
 				throw new DbException(e.getMessage());

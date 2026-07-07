@@ -10,16 +10,23 @@ public class MenuDepartamento {
     private static final Input io = new Input();
     static DepartamentoDAO dep = new DepartamentoDAO();
     public static void exibir() throws java.lang.Exception {
-        int op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários ");
+        int op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
         switch(op){
             case 1:Inserir(); break;
             case 2:Remover(); break;
             case 3:Actualizar(); break;
             case 4:Listar(); break;
             case 5:Mostrar(); break;
+            case 6:Buscar(); break;
             default: break;
         }
 
+    }
+
+    private static void Buscar() throws Exception {
+        int choice = io.enterInt("Insira o número do Departamento");
+        Departamento departamento = dep.Busca(choice);
+        IO.println("CodDepartamento: "+departamento.getCodDepartamento()+" Nome: "+departamento.getNome());
     }
 
     private static void Mostrar() throws Exception {
@@ -42,7 +49,9 @@ public class MenuDepartamento {
     }
 
     private static void Actualizar() throws Exception{
-
+        int index = io.enterInt("Insira o número do departamento a actualizar");
+        String nomeDepartamento = io.enterString("Insira o novo nome para o departamento "+index);
+        dep.update(nomeDepartamento,index);
     }
 
     public static void Inserir() throws Exception{

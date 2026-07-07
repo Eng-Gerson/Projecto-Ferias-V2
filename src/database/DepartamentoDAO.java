@@ -59,6 +59,21 @@ public class DepartamentoDAO {
         }
         return lista;
     }
+    public Departamento Busca(int index) throws DbException{
+        String sql = "Select * from departamento where codDepartamento = ?";
+        Departamento dep = null;
+        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1,index);
+            try(ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    dep = new Departamento(rs.getInt("codDepartamento"), rs.getString("nome"));
+                }
+            }
+        }catch(SQLException s){
+            throw new DbException(s.getMessage());
+        }
+        return dep;
+    }
     public ArrayList<Empregado> listaEmpregado(int index)throws DbException{
         ArrayList<Empregado> emp = new ArrayList<>();
         String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where empregado.codDepartamento = ?";
