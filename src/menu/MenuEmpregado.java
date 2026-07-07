@@ -7,10 +7,9 @@ import java.util.ArrayList;
 import model.*;
 public class MenuEmpregado {
 	private static final EmpregadoDAO emp = new EmpregadoDAO();
-	private static Input io = new Input();
-	private static int op;
-	public static void exibir()throws Exception {
-		op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
+	private static final Input io = new Input();
+    public static void exibir()throws Exception {
+        int op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
 		switch(op){
 			case 1: Inserir();break;
 			case 2: Remover();break;
@@ -29,7 +28,7 @@ public class MenuEmpregado {
 	private static void Inserir()throws Exception{
 		String nome = io.enterString("Insira o 1º nome");
 		String apelido = io.enterString("Insira o apelido");
-		Double salario = io.enterDouble("Insira o salário");
+		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
 		Departamento dep = new Departamento(1,"TI"); //TODO usar DepartamentoDAO
@@ -57,7 +56,7 @@ public class MenuEmpregado {
 		int id = io.enterInt("Insira o id do funcionário  a ser actualizado");
 		String nome = io.enterString("Insira o 1º nome");
 		String apelido = io.enterString("Insira o apelido");
-		Double salario = io.enterDouble("Insira o salário");
+		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
 		Departamento dep = new Departamento(1,"TI"); //TODO usar DepartamentoDAO
