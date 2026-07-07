@@ -22,7 +22,16 @@ public class MenuDepartamento {
 
     }
 
-    private static void Mostrar() {
+    private static void Mostrar() throws Exception {
+        int index = io.enterInt("Insira o código do departamento e eu te mostrarei os funcionários lá");
+        ArrayList<Empregado> empregados = dep.listaEmpregado(index);
+        if(empregados == null){
+            IO.println("Das duas uma, ou o departamento não existe ou não tem empregados");
+        } else {
+            for (Empregado e : empregados) {
+                System.out.println("CodEmpregado: "+e.getCodEmpregado()+ "Nome: "+e.getNome());
+            }
+        }
     }
 
     private static void Listar() throws Exception{

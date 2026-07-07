@@ -1,5 +1,6 @@
 package menu;
 import input.Input;
+//TODO refactorar os menus, observando os principios SOLID
 public class MenuPrincipal {
 	private static int op;
 	private static final Input io = new Input();

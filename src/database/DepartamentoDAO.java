@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Empregado;
 public class DepartamentoDAO {
 	public void add(String dep) throws DbException {
         String sql = "INSERT INTO departamento (nome) VALUES (?)";
@@ -57,5 +58,20 @@ public class DepartamentoDAO {
             throw new DbException(e.getMessage());
         }
         return lista;
+    }
+    public ArrayList<Empregado> listaEmpregado(int index)throws DbException{
+        ArrayList<Empregado> emp = new ArrayList<>();
+        String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where empregado.codDepartamento = ?";
+        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+            stmt.setInt(1,index);
+            try(ResultSet rs = stmt.executeQuery()){
+            while(rs.next()){
+                emp.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),new Departamento(rs.getInt("codDepartamento"),rs.getString("nomeDepartamento"))));
+            }
+            }
+        }catch(SQLException s){
+            throw new DbException(s.getMessage());
+        }
+        return emp;
     }
 }
