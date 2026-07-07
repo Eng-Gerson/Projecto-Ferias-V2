@@ -45,4 +45,17 @@ public class DepartamentoDAO {
             throw new DbException(s.getMessage());
         }
     }
+    public ArrayList<Departamento> list() throws DbException{
+        String sql = "Select * from Departamento";
+        ArrayList<Departamento> lista = new ArrayList<>();
+        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
+            while(rs.next()){
+                lista.add(new Departamento(rs.getInt("codDepartamento"),rs.getString("nome")));
+            }
+
+        }catch(SQLException e){
+            throw new DbException(e.getMessage());
+        }
+        return lista;
+    }
 }
