@@ -10,7 +10,7 @@ import model.Empregado;
 public class DepartamentoDAO {
 	public void add(String dep) throws DbException {
         String sql = "INSERT INTO departamento (nome) VALUES (?)";
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setString(1,dep);
             stmt.executeUpdate();
         } catch(SQLException e){
@@ -19,7 +19,7 @@ public class DepartamentoDAO {
     }
     public void remove(int index)throws DbException{
         String sql = "DELETE from departamento where codDepartamento = ? ";
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             int linha = stmt.executeUpdate();
             if(linha > 0){
@@ -33,7 +33,7 @@ public class DepartamentoDAO {
     }
     public void update(String nome,int index)throws DbException{
         String sql = "Update from departamento set nome = ? where codDepartamento = ?";
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setString(1,nome);
             stmt.setInt(2,index);
             int i = stmt.executeUpdate();
@@ -49,7 +49,7 @@ public class DepartamentoDAO {
     public ArrayList<Departamento> list() throws DbException{
         String sql = "Select * from Departamento";
         ArrayList<Departamento> lista = new ArrayList<>();
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
                 lista.add(new Departamento(rs.getInt("codDepartamento"),rs.getString("nome")));
             }
@@ -62,7 +62,7 @@ public class DepartamentoDAO {
     public Departamento Busca(int index) throws DbException{
         String sql = "Select * from departamento where codDepartamento = ?";
         Departamento dep = null;
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -77,7 +77,7 @@ public class DepartamentoDAO {
     public ArrayList<Empregado> listaEmpregado(int index)throws DbException{
         ArrayList<Empregado> emp = new ArrayList<>();
         String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where empregado.codDepartamento = ?";
-        try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()){
             while(rs.next()){

@@ -1,4 +1,5 @@
 package menu;
+import database.DataBase;
 import input.Input;
 //TODO refactorar os menus, observando os principios SOLID
 public class MenuPrincipal {
@@ -15,6 +16,7 @@ public class MenuPrincipal {
 					MenuDepartamento.exibir();
 					break;
 				default:
+					DataBase.closeConnection();
 					IO.println("Bye");
 					break;
 			}

@@ -10,7 +10,7 @@ import model.*;
 public class EmpregadoDAO {
 	public void add(Empregado emp)throws Exception{
 		String sql = "INSERT INTO empregado(nome,apelido,salario,dataNascimento,codDepartamento) VALUES (?,?,?,?,?) ";
-		try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
 			stmt.setString(1, emp.getNome());
 			stmt.setString(2, emp.getApelido());
 			stmt.setDouble(3, emp.getSalario());
@@ -29,7 +29,7 @@ public class EmpregadoDAO {
 	public ArrayList<Empregado> listar()throws DbException{
 		ArrayList<Empregado> lista = new ArrayList<>();
 		String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento order by codEmpregado";
-		try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
+		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
 			while(rs.next()){
 				lista.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),new Departamento(rs.getInt("codDepartamento"),rs.getString("nomeDepartamento"))));
 		}
@@ -40,7 +40,7 @@ public class EmpregadoDAO {
 	}
 	public Empregado BuscarId(int id)throws Exception{
 		String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where codEmpregado = ?";
-		try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)
+		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
 ){
 			stmt.setInt(1,id);
 			try(ResultSet rs = stmt.executeQuery()){
@@ -55,7 +55,7 @@ public class EmpregadoDAO {
 	}
 	public void remover(int id)throws DbException{
 		String sql = "Delete from empregado where codEmpregado = ?";
-		try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
 			stmt.setInt(1,id);
 			int linhas = stmt.executeUpdate();
 			if(linhas > 0){
@@ -69,7 +69,7 @@ public class EmpregadoDAO {
 	}
 	public void update(int id,Empregado emp)throws DbException{
 		String sql = "Update empregado set nome = ?,apelido = ?,salario = ?,dataNascimento = ?,codDepartamento = ? where codEmpregado = ? ";
-		try(Connection conn = DataBase.getConnection();PreparedStatement stmt = conn.prepareStatement(sql)){
+		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
 			stmt.setString(1, emp.getNome());
 			stmt.setString(2, emp.getApelido());
 			stmt.setDouble(3, emp.getSalario());
