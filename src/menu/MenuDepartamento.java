@@ -8,19 +8,34 @@ import java.lang.Exception;
 
 public class MenuDepartamento {
     private static final Input io = new Input();
+    private static int op;
     static DepartamentoDAO dep = new DepartamentoDAO();
     public static void exibir() throws java.lang.Exception {
-        int op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
-        switch(op){
-            case 1:Inserir(); break;
-            case 2:Remover(); break;
-            case 3:Actualizar(); break;
-            case 4:Listar(); break;
-            case 5:Mostrar(); break;
-            case 6:Buscar(); break;
-            default: break;
-        }
-
+        do {
+            op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
+            switch (op) {
+                case 1:
+                    Inserir();
+                    break;
+                case 2:
+                    Remover();
+                    break;
+                case 3:
+                    Actualizar();
+                    break;
+                case 4:
+                    Listar();
+                    break;
+                case 5:
+                    Mostrar();
+                    break;
+                case 6:
+                    Buscar();
+                    break;
+                default:
+                    break;
+            }
+        }while(op > 0 && op < 7);
     }
 
     private static void Buscar() throws Exception {

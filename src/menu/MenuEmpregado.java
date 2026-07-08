@@ -10,16 +10,31 @@ public class MenuEmpregado {
 	private static final EmpregadoDAO emp = new EmpregadoDAO();
     private static final DepartamentoDAO dep = new DepartamentoDAO();
 	private static final Input io = new Input();
+	private static int op;
     public static void exibir()throws Exception {
-        int op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
-		switch(op){
-			case 1: Inserir();break;
-			case 2: Remover();break;
-			case 3: Listar();break;
-			case 4: Buscar();break;
-			case 5: Actualizar();break;
-			default: IO.print("Está Nice");break;
-		}
+		do {
+			op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
+			switch (op) {
+				case 1:
+					Inserir();
+					break;
+				case 2:
+					Remover();
+					break;
+				case 3:
+					Listar();
+					break;
+				case 4:
+					Buscar();
+					break;
+				case 5:
+					Actualizar();
+					break;
+				default:
+					IO.println("Está Nice");
+					break;
+			}
+		}while(op > 0 && op < 6);
 	}
 
 	private static void Remover()throws Exception{
