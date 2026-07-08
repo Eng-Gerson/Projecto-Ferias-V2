@@ -26,10 +26,6 @@ public class Projecto {
         return dataInicio;
     }
 
-    public void setDepartamento(Departamento departamento) {
-        this.departamento = departamento;
-    }
-
     public void setDataInicio(Date dataInicio) {
         this.dataInicio = dataInicio;
     }
@@ -40,5 +36,13 @@ public class Projecto {
 
     public void setLocalizacao(String localizacao) {
         this.localizacao = localizacao;
+    }
+
+    public Departamento getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(Departamento departamento) {
+        this.departamento = departamento;
     }
 }
