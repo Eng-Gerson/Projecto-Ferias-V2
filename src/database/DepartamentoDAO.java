@@ -58,7 +58,7 @@ public class DepartamentoDAO {
         }
         return lista;
     }
-    public Departamento Busca(int index) throws DbException{
+    public Departamento SearchID(int index) throws DbException{
         String sql = "Select * from departamento where codDepartamento = ?";
         Departamento dep = null;
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){

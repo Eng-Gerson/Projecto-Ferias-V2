@@ -39,7 +39,7 @@ public class MenuEmpregado {
 
 	private static void Remover()throws Exception{
 		int id = io.enterInt("Insira o id do empregado a ser removido");
-		emp.remover(id);
+		emp.remove(id);
 	}
 
 	private static void Inserir()throws Exception{
@@ -48,7 +48,7 @@ public class MenuEmpregado {
 		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
-		Departamento dpt = dep.Busca(io.enterInt("Insira o código do departamento"));
+		Departamento dpt = dep.SearchID(io.enterInt("Insira o código do departamento"));
 		emp.add(new Empregado(nome,apelido,salario,data,dpt));
 		
 	}
@@ -61,7 +61,7 @@ public class MenuEmpregado {
 	}
 	public static void Buscar()throws Exception{
 		int id = io.enterInt("Insira o id do empregado");
-		Empregado empregado = emp.BuscarId(id);
+		Empregado empregado = emp.SearchID(id);
 		if(empregado == null){
 			System.out.println("O empregado não existe!");
 		} else {
@@ -76,7 +76,7 @@ public class MenuEmpregado {
 		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
-        Departamento dpt = dep.Busca(io.enterInt("Insira o código do departamento"));
+        Departamento dpt = dep.SearchID(io.enterInt("Insira o código do departamento"));
         emp.update(id,new Empregado(nome,apelido,salario,data,dpt));
 	}
 }

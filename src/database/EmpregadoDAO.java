@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.*;
 
-public class EmpregadoDAO {
+public class EmpregadoDAO{
 	public void add(Empregado emp)throws Exception{
 		String sql = "INSERT INTO empregado(nome,apelido,salario,dataNascimento,codDepartamento) VALUES (?,?,?,?,?) ";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
@@ -37,7 +37,7 @@ public class EmpregadoDAO {
 		}
 		return lista;
 	}
-	public Empregado BuscarId(int id)throws Exception{
+	public Empregado SearchID(int id)throws Exception{
 		String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where codEmpregado = ?";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
 ){
@@ -52,7 +52,7 @@ public class EmpregadoDAO {
 		}
 	return null;
 	}
-	public void remover(int id)throws DbException{
+	public void remove(int id)throws DbException{
 		String sql = "Delete from empregado where codEmpregado = ?";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
 			stmt.setInt(1,id);

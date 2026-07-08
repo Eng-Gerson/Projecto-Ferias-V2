@@ -9,7 +9,7 @@ import java.lang.Exception;
 public class MenuDepartamento {
     private static final Input io = new Input();
     static DepartamentoDAO dep = new DepartamentoDAO();
-    public static void exibir() throws java.lang.Exception {
+    public static void exibir() throws Exception {
         int op;
         do {
             op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
@@ -40,7 +40,7 @@ public class MenuDepartamento {
 
     private static void Buscar() throws Exception {
         int choice = io.enterInt("Insira o número do Departamento");
-        Departamento departamento = dep.Busca(choice);
+        Departamento departamento = dep.SearchID(choice);
         IO.println("CodDepartamento: "+departamento.getCodDepartamento()+" Nome: "+departamento.getNome());
     }
 
@@ -69,11 +69,11 @@ public class MenuDepartamento {
         dep.update(nomeDepartamento,index);
     }
 
-    public static void Inserir() throws Exception{
+    private static void Inserir() throws Exception{
         String nomeDepartamento = io.enterString("Insira o nome do novo departamento");
         dep.add(nomeDepartamento);
     }
-    public static void Remover() throws Exception{
+    private static void Remover() throws Exception{
         int index = io.enterInt("Insira o código do departamento a ser removido");
         dep.remove(index);
     }
