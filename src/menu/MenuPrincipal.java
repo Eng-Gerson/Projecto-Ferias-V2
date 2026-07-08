@@ -3,9 +3,9 @@ import database.DataBase;
 import input.Input;
 //TODO refactorar os menus, observando os principios SOLID
 public class MenuPrincipal {
-	private static int op;
 	private static final Input io = new Input();
 	public static void exibir()throws Exception{
+		int op;
 		do {
 			op = io.enterInt("========== MENU PRINCIPAL ========= \n1-Empregado \n2-Departamento");
 			switch (op) {
@@ -17,7 +17,7 @@ public class MenuPrincipal {
 					break;
 				default:
 					DataBase.closeConnection();
-					IO.println("Bye");
+					IO.println("GoodBye!");
 					break;
 			}
 		} while(op > 0 && op < 3);

@@ -10,8 +10,8 @@ public class MenuEmpregado {
 	private static final EmpregadoDAO emp = new EmpregadoDAO();
     private static final DepartamentoDAO dep = new DepartamentoDAO();
 	private static final Input io = new Input();
-	private static int op;
     public static void exibir()throws Exception {
+		int op;
 		do {
 			op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
 			switch (op) {

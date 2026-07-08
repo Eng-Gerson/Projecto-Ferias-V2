@@ -1,7 +1,6 @@
 package database;
 import exception.DbException;
 import model.Departamento;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -8,9 +8,9 @@ import java.lang.Exception;
 
 public class MenuDepartamento {
     private static final Input io = new Input();
-    private static int op;
     static DepartamentoDAO dep = new DepartamentoDAO();
     public static void exibir() throws java.lang.Exception {
+        int op;
         do {
             op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
             switch (op) {
