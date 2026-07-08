@@ -5,11 +5,13 @@ public class Departamento {
 	private int codDepartamento;
 	private String nome;
 	private List<Empregado> empregado;
+	private List<Projecto> projecto;
 
 	public Departamento(int codDepartamento, String nome) {
 		this.codDepartamento = codDepartamento;
 		this.nome = nome;
 		empregado = new ArrayList<>();
+		projecto = new ArrayList<>();
 	}
 
 	public int getCodDepartamento() {
@@ -30,6 +32,7 @@ public class Departamento {
 	public void adicionarEmpregado(Empregado e){
 		empregado.add(e);
 	}
+	public void adicionarProjecto(Projecto p){ projecto.add(p);}
 
 	@Override
 	public String toString() {
