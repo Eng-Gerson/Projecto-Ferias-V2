@@ -38,7 +38,7 @@ public class MenuEmpregado {
 	}
 
 	private static void Remover()throws Exception{
-		int id = io.enterInt("Insira o id do empregado a ser removido");
+		int id = io.enterInt("Insira o código do empregado a ser removido");
 		emp.remove(id);
 	}
 
@@ -56,11 +56,11 @@ public class MenuEmpregado {
 	private static void Listar()throws DbException{
 		ArrayList<Empregado> listagem = emp.list();
 		for(Empregado e : listagem){
-			IO.println(e.toString());
+			IO.println(e);
 		}
 	}
 	public static void Buscar()throws Exception{
-		int id = io.enterInt("Insira o id do empregado");
+		int id = io.enterInt("Insira o código do empregado");
 		Empregado empregado = emp.searchID(id);
 		if(empregado == null){
 			System.out.println("O empregado não existe!");
@@ -70,13 +70,17 @@ public class MenuEmpregado {
 	}
 
 	private static void Actualizar()throws Exception{
-		int id = io.enterInt("Insira o id do funcionário  a ser actualizado");
-		String nome = io.enterString("Insira o 1º nome");
-		String apelido = io.enterString("Insira o apelido");
-		double salario = io.enterDouble("Insira o salário");
-		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-		Date data =  Date.valueOf(dt);
-        Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
-        emp.update(id,new Empregado(nome,apelido,salario,data,dpt));
+		int id = io.enterInt("Insira o código do empregado a ser actualizado");
+		if(emp.searchID(id) != null) {
+			String nome = io.enterString("Insira o 1º nome");
+			String apelido = io.enterString("Insira o apelido");
+			double salario = io.enterDouble("Insira o salário");
+			String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
+			Date data = Date.valueOf(dt);
+			Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
+			emp.update(id, new Empregado(nome, apelido, salario, data, dpt));
+		} else {
+			IO.println("Não existe empregado com esse código");
+		}
 	}
 }

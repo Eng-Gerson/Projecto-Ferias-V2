@@ -13,6 +13,12 @@ public class Projecto {
         this.localizacao = localizacao;
         this.departamento = departamento;
     }
+    public Projecto(Date dataInicio, String localizacao, Departamento departamento) {
+        this.dataInicio = dataInicio;
+        this.localizacao = localizacao;
+        this.departamento = departamento;
+    }
+
 
     public int getCodProjecto() {
         return codProjecto;

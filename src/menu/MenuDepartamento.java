@@ -44,8 +44,13 @@ public class MenuDepartamento {
 
     private static void Buscar() throws Exception {
         int choice = io.enterInt("Insira o número do Departamento");
-        Departamento departamento = dep.searchID(choice);
-        IO.println("CodDepartamento: "+departamento.getCodDepartamento()+" Nome: "+departamento.getNome());
+        if(dep.searchID(choice) != null) {
+            Departamento departamento = dep.searchID(choice);
+            IO.println("CodDepartamento: " + departamento.getCodDepartamento() + " Nome: " + departamento.getNome());
+        } else {
+            IO.println("Departamento com esse código não existe");
+        }
+
     }
 
     private static void MostrarEmpregado() throws Exception {
@@ -63,14 +68,18 @@ public class MenuDepartamento {
     private static void Listar() throws Exception{
         ArrayList<Departamento> departamento =  dep.list();
         for(Departamento dpt : departamento){
-            IO.println(dpt.toString());
+            IO.println(dpt);
         }
     }
 
     private static void Actualizar() throws Exception{
         int index = io.enterInt("Insira o número do departamento a actualizar");
-        String nomeDepartamento = io.enterString("Insira o novo nome para o departamento "+index);
-        dep.update(nomeDepartamento,index);
+        if(dep.searchID(index) != null) {
+            String nomeDepartamento = io.enterString("Insira o novo nome para o departamento " + index);
+            dep.update(nomeDepartamento, index);
+        } else {
+            IO.println("O departamento com esse código não existe");
+        }
     }
 
     private static void Inserir() throws Exception{
@@ -85,7 +94,7 @@ public class MenuDepartamento {
         int index = io.enterInt("Insira o código do departamento e eu te mostrarei os projectos associados");
         ArrayList<Projecto> projectos = dep.listaProjecto(index);
         if(projectos == null){
-            IO.println("Das duas uma, ou o departamento não existe ou não tem empregados");
+            IO.println("Das duas uma, ou o departamento não existe ou não tem projectos associados");
         } else {
             for (Projecto p : projectos) {
                 System.out.println("CodProjecto: "+p.getCodProjecto()+ "Localização: "+p.getLocalizacao());

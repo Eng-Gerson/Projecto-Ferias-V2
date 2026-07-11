@@ -34,8 +34,12 @@ public class ProjectoDAO {
         String sql = "SELECT * from projecto where codProjecto = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
-            try(ResultSet rs = stmt.executeQuery()){
-                return new Projecto(rs.getInt("codProjecto"),rs.getDate("dataInicio"),rs.getString("localizacao"),dep.searchID(rs.getInt("codDepartamento")));
+            try(ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new Projecto(rs.getInt("codProjecto"), rs.getDate("dataInicio"), rs.getString("localizacao"), dep.searchID(rs.getInt("codDepartamento")));
+                } else{
+                    return null;
+                }
             }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
