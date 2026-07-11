@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import model.*;
 
 public class EmpregadoDAO{
+	private static final DepartamentoDAO dep = new DepartamentoDAO();
 	public void add(Empregado emp)throws Exception{
 		String sql = "INSERT INTO empregado(nome,apelido,salario,dataNascimento,codDepartamento) VALUES (?,?,?,?,?) ";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
@@ -25,26 +26,26 @@ public class EmpregadoDAO{
 		
 	}
 	
-	public ArrayList<Empregado> listar()throws DbException{
+	public ArrayList<Empregado> list()throws DbException{
 		ArrayList<Empregado> lista = new ArrayList<>();
-		String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento order by codEmpregado";
+		String sql = "select * from empregado ";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql);ResultSet rs = stmt.executeQuery()){
 			while(rs.next()){
-				lista.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),new Departamento(rs.getInt("codDepartamento"),rs.getString("nomeDepartamento"))));
+				lista.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),dep.searchID(rs.getInt("codDepartamento"))));
 		}
 	}catch(SQLException e){
 			throw new DbException("Erro:"+e.getMessage());
 		}
 		return lista;
 	}
-	public Empregado SearchID(int id)throws Exception{
-		String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where codEmpregado = ?";
+	public Empregado searchID(int id)throws Exception{
+		String sql = "select * from empregado where codEmpregado = ?";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
 ){
 			stmt.setInt(1,id);
 			try(ResultSet rs = stmt.executeQuery()){
 				if(rs.next()){
-				return new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),new Departamento(rs.getInt("codDepartamento"),rs.getString("nomeDepartamento")));
+				return new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),dep.searchID(rs.getInt("codDepartamento")));
 			}
 		}
 		}catch(SQLException s){

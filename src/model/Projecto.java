@@ -45,4 +45,12 @@ public class Projecto {
     public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
+
+    @Override
+    public String toString() {
+        return "codProjecto=" + codProjecto +
+                ", dataInicio=" + dataInicio +
+                ", localizacao='" + localizacao + '\'' +
+                ", departamento=" + departamento;
+    }
 }

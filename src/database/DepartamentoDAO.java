@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Empregado;
+import model.Projecto;
+
 public class DepartamentoDAO {
 	public void add(String dep) throws DbException {
         String sql = "INSERT INTO departamento (nome) VALUES (?)";
@@ -58,7 +60,7 @@ public class DepartamentoDAO {
         }
         return lista;
     }
-    public Departamento SearchID(int index) throws DbException{
+    public Departamento searchID(int index) throws DbException{
         String sql = "Select * from departamento where codDepartamento = ?";
         Departamento dep = null;
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
@@ -75,17 +77,32 @@ public class DepartamentoDAO {
     }
     public ArrayList<Empregado> listaEmpregado(int index)throws DbException{
         ArrayList<Empregado> emp = new ArrayList<>();
-        String sql = "select empregado.*, departamento.nome as nomeDepartamento from empregado inner join departamento on empregado.codDepartamento = departamento.codDepartamento where empregado.codDepartamento = ?";
+        String sql = "select * from empregado where codDepartamento = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
-                emp.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),new Departamento(rs.getInt("codDepartamento"),rs.getString("nomeDepartamento"))));
+                emp.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"), searchID(rs.getInt("codDepartamento"))));
             }
             }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
         }
         return emp;
+    }
+    public ArrayList<Projecto> listaProjecto(int index)throws DbException{
+        ArrayList<Projecto> proj = new ArrayList<>();
+        String sql = "select * from empregado where codDepartamento = ?";
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
+            stmt.setInt(1,index);
+            try(ResultSet rs = stmt.executeQuery()){
+                while(rs.next()){
+                    proj.add(new Projecto(rs.getInt("codProjecto"),rs.getDate("dataInicio"),rs.getString("localizacao"),searchID(rs.getInt("codDepartamento"))));
+                }
+            }
+        }catch(SQLException s){
+            throw new DbException(s.getMessage());
+        }
+        return proj;
     }
 }

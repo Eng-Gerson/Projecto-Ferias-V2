@@ -4,6 +4,8 @@ import database.DepartamentoDAO;
 import model.Departamento;
 import java.util.ArrayList;
 import model.Empregado;
+import model.Projecto;
+
 import java.lang.Exception;
 
 public class MenuDepartamento {
@@ -12,7 +14,7 @@ public class MenuDepartamento {
     public static void exibir() throws Exception {
         int op;
         do {
-            op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \nOutro- Sair");
+            op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \n7-Mostrar Projectos \nOutro- Sair");
             switch (op) {
                 case 1:
                     Inserir();
@@ -27,24 +29,26 @@ public class MenuDepartamento {
                     Listar();
                     break;
                 case 5:
-                    Mostrar();
+                    MostrarEmpregado();
                     break;
                 case 6:
                     Buscar();
                     break;
+                case 7:
+                    MostrarProjecto();
                 default:
                     break;
             }
-        }while(op > 0 && op < 7);
+        }while(op > 0 && op < 8);
     }
 
     private static void Buscar() throws Exception {
         int choice = io.enterInt("Insira o número do Departamento");
-        Departamento departamento = dep.SearchID(choice);
+        Departamento departamento = dep.searchID(choice);
         IO.println("CodDepartamento: "+departamento.getCodDepartamento()+" Nome: "+departamento.getNome());
     }
 
-    private static void Mostrar() throws Exception {
+    private static void MostrarEmpregado() throws Exception {
         int index = io.enterInt("Insira o código do departamento e eu te mostrarei os funcionários lá");
         ArrayList<Empregado> empregados = dep.listaEmpregado(index);
         if(empregados == null){
@@ -77,4 +81,16 @@ public class MenuDepartamento {
         int index = io.enterInt("Insira o código do departamento a ser removido");
         dep.remove(index);
     }
+    private static void MostrarProjecto() throws Exception {
+        int index = io.enterInt("Insira o código do departamento e eu te mostrarei os projectos associados");
+        ArrayList<Projecto> projectos = dep.listaProjecto(index);
+        if(projectos == null){
+            IO.println("Das duas uma, ou o departamento não existe ou não tem empregados");
+        } else {
+            for (Projecto p : projectos) {
+                System.out.println("CodProjecto: "+p.getCodProjecto()+ "Localização: "+p.getLocalizacao());
+            }
+        }
+    }
+
 }

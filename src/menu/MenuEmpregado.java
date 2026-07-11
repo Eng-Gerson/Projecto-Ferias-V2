@@ -48,20 +48,20 @@ public class MenuEmpregado {
 		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
-		Departamento dpt = dep.SearchID(io.enterInt("Insira o código do departamento"));
+		Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
 		emp.add(new Empregado(nome,apelido,salario,data,dpt));
 		
 	}
 
 	private static void Listar()throws DbException{
-		ArrayList<Empregado> listagem = emp.listar();
+		ArrayList<Empregado> listagem = emp.list();
 		for(Empregado e : listagem){
 			IO.println(e.toString());
 		}
 	}
 	public static void Buscar()throws Exception{
 		int id = io.enterInt("Insira o id do empregado");
-		Empregado empregado = emp.SearchID(id);
+		Empregado empregado = emp.searchID(id);
 		if(empregado == null){
 			System.out.println("O empregado não existe!");
 		} else {
@@ -76,7 +76,7 @@ public class MenuEmpregado {
 		double salario = io.enterDouble("Insira o salário");
 		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
 		Date data =  Date.valueOf(dt);
-        Departamento dpt = dep.SearchID(io.enterInt("Insira o código do departamento"));
+        Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
         emp.update(id,new Empregado(nome,apelido,salario,data,dpt));
 	}
 }

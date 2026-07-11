@@ -7,13 +7,16 @@ public class MenuPrincipal {
 	public static void exibir()throws Exception{
 		int op;
 		do {
-			op = io.enterInt("========== MENU PRINCIPAL ========= \n1-Empregado \n2-Departamento");
+			op = io.enterInt("========== MENU PRINCIPAL ========= \n1-Empregado \n2-Departamento \n3-Projecto");
 			switch (op) {
 				case 1:
 					MenuEmpregado.exibir();
 					break;
 				case 2:
 					MenuDepartamento.exibir();
+					break;
+				case 3:
+					MenuProjecto.exibir();
 					break;
 				default:
 					DataBase.closeConnection();
