@@ -2,90 +2,86 @@ package database;
 
 import exception.DbException;
 import model.Empregado;
-
+import model.Dependente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class DependenteDAO {	private static final DepartamentoDAO dep = new DepartamentoDAO();
-    public void add(Empregado emp)throws Exception{
-        String sql = "INSERT INTO empregado(nome,apelido,salario,dataNascimento,codDepartamento) VALUES (?,?,?,?,?) ";
+public class DependenteDAO {
+    private static final EmpregadoDAO emp = new EmpregadoDAO();
+    public void add(Dependente dep)throws DbException{
+        String sql = "INSERT INTO dependente(nome,sexo,dataNascimento,parentesco,codEmpregado) VALUES (?,?,?,?,?) ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
-            stmt.setString(1, emp.getNome());
-            stmt.setString(2, emp.getApelido());
-            stmt.setDouble(3, emp.getSalario());
-            stmt.setDate(4, emp.getDataNascimento());
-            stmt.setInt(5, emp.getDepartamento().getCodDepartamento());
+            stmt.setString(1, dep.getNome());
+            stmt.setString(2, dep.getSexo());
+            stmt.setDate(3, dep.getDataNascimento());
+            stmt.setString(4, dep.getParentesco());
+            stmt.setInt(5, dep.getEmpregado().getCodEmpregado());
             stmt.executeUpdate();
-            IO.println("Empregado inserido com sucesso!");
+            IO.println("Dependente inserido com sucesso!");
         }catch(SQLException s){
             throw new DbException(s.getMessage());
-        }catch(Exception e){
-            throw new DbException("Erro: "+e.getMessage());
         }
-
     }
-    public ArrayList<Empregado> list()throws DbException{
-        ArrayList<Empregado> lista = new ArrayList<>();
-        String sql = "select * from empregado ";
+    public ArrayList<Dependente> list()throws DbException{
+        ArrayList<Dependente> lista = new ArrayList<>();
+        String sql = "select * from dependente ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql); ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
-                lista.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),dep.searchID(rs.getInt("codDepartamento"))));
+                lista.add(new Dependente(rs.getInt("codDependente"),rs.getString("nome"), rs.getString("sexo"),rs.getDate("dataNascimento"),rs.getString("parentesco"),emp.searchID(rs.getInt("codEmpregado")) ));
             }
         }catch(SQLException e){
             throw new DbException("Erro:"+e.getMessage());
         }
         return lista;
     }
-    public Empregado searchID(int id)throws Exception{
-        String sql = "select * from empregado where codEmpregado = ?";
+    public Dependente searchID(int id)throws DbException{
+        String sql = "select * from dependente where codDependente = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
         ){
             stmt.setInt(1,id);
             try(ResultSet rs = stmt.executeQuery()){
                 if(rs.next()){
-                    return new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),dep.searchID(rs.getInt("codDepartamento")));
+                    return new Dependente(rs.getInt("codDependente"),rs.getString("nome"), rs.getString("sexo"),rs.getDate("dataNascimento"),rs.getString("parentesco"),emp.searchID(rs.getInt("codEmpregado")) ));
                 }
-            }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
         }
         return null;
     }
+    }
     public void remove(int id)throws DbException{
-        String sql = "Delete from empregado where codEmpregado = ?";
+        String sql = "Delete from dependente where codDependente = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,id);
             int linhas = stmt.executeUpdate();
             if(linhas > 0){
-                System.out.println("Empregado removido com sucesso!");
+                System.out.println("Dependente removido com sucesso!");
             } else {
-                System.out.println("Empregado não encontrado");
+                System.out.println("Dependente não encontrado");
             }
         } catch(SQLException s){
-            throw new DbException("Erro ao remover o empregado: "+s.getMessage());
+            throw new DbException("Erro ao remover o dependente: "+s.getMessage());
         }
     }
-    public void update(int id,Empregado emp)throws DbException{
-        String sql = "Update empregado set nome = ?,apelido = ?,salario = ?,dataNascimento = ?,codDepartamento = ? where codEmpregado = ? ";
+    public void update(int id,Dependente dep)throws DbException{
+        String sql = "Update dependente set nome = ?,sexo = ?,dataNascimento = ?,parentesco = ?,codEmpregado = ? where codDependente = ? ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
-            stmt.setString(1, emp.getNome());
-            stmt.setString(2, emp.getApelido());
-            stmt.setDouble(3, emp.getSalario());
-            stmt.setDate(4, emp.getDataNascimento());
-            stmt.setInt(5, emp.getDepartamento().getCodDepartamento());
+            stmt.setString(1, dep.getNome());
+            stmt.setString(2, dep.getSexo());
+            stmt.setDate(3, dep.getDataNascimento());
+            stmt.setString(4, dep.getParentesco());
+            stmt.setInt(5,dep.getEmpregado().getCodEmpregado());
             stmt.setInt(6,id);
             int linhas = stmt.executeUpdate();
             if(linhas > 0){
-                IO.println("Empregado actualizado com sucesso!");
+                IO.println("Dependente actualizado com sucesso!");
             } else {
-                IO.println("Empregado não achado");
+                IO.println("Dependente não achado");
             }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
-        }catch(Exception e){
-            throw new DbException("Erro: "+e.getMessage());
         }
     }
 

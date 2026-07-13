@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class ChefiaDAO {
     private static final DepartamentoDAO dep = new DepartamentoDAO();
     private static final EmpregadoDAO emp = new EmpregadoDAO();
-    public void add(Chefia chefe)throws Exception{
+    public void add(Chefia chefe)throws DbException{
         String sql = "INSERT INTO chefia VALUES (?,?,?,?) ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1, chefe.getEmpregado().getCodEmpregado());
@@ -23,10 +23,7 @@ public class ChefiaDAO {
             IO.println("Empregado promovido a chefe com sucesso!");
         }catch(SQLException s){
             throw new DbException(s.getMessage());
-        }catch(Exception e){
-            throw new DbException("Erro: "+e.getMessage());
         }
-
     }
     public ArrayList<Chefia> list()throws DbException{
         ArrayList<Chefia> lista = new ArrayList<>();
@@ -40,7 +37,7 @@ public class ChefiaDAO {
         }
         return lista;
     }
-    public Chefia searchID(int id)throws Exception{
+    public Chefia searchID(int id)throws DbException{
         String sql = "select * from chefia where codDepartamento = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
         ){
@@ -66,7 +63,7 @@ public class ChefiaDAO {
                 System.out.println("O empregado não é chefe");
             }
         } catch(SQLException s){
-            throw new DbException("Erro ao remover o empregado: "+s.getMessage());
+            throw new DbException("Erro ao despromover o empregado: "+s.getMessage());
         }
     }
     public void update(int id,Chefia chefe)throws DbException{
@@ -76,6 +73,7 @@ public class ChefiaDAO {
             stmt.setInt(2, chefe.getDepartamento().getCodDepartamento());
             stmt.setDate(3, chefe.getDataInicio());
             stmt.setString(4, chefe.getDesignacao());
+            stmt.setInt(5,id);
             int linhas = stmt.executeUpdate();
             if(linhas > 0){
                 IO.println("Chefe actualizado com sucesso!");
@@ -84,8 +82,6 @@ public class ChefiaDAO {
             }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
-        }catch(Exception e){
-            throw new DbException("Erro: "+e.getMessage());
         }
     }
 

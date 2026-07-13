@@ -3,15 +3,15 @@ import java.sql.Date;
 public class Dependente {
     private int codDependente;
     private String nome;
-    private char sexo;
+    private String sexo;
     private Date dataNascimento;
     private String parentesco;
     private Empregado empregado;
 
-    public Dependente(int codDependente, String nome, char sexo, Date dataNascimento, String parentesco, Empregado empregado) {
+    public Dependente(int codDependente, String nome, String sexo, Date dataNascimento, String parentesco, Empregado empregado) {
         this.codDependente = codDependente;
         this.nome = nome;
-        this.sexo = sexo;
+        this.sexo = String.valueOf(sexo.charAt(0));
         this.dataNascimento = dataNascimento;
         this.parentesco = parentesco;
         this.empregado = empregado;
@@ -25,7 +25,7 @@ public class Dependente {
         return nome;
     }
 
-    public char getSexo() {
+    public String getSexo() {
         return sexo;
     }
 
