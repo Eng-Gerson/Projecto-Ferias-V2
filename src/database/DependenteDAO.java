@@ -43,13 +43,13 @@ public class DependenteDAO {
             stmt.setInt(1,id);
             try(ResultSet rs = stmt.executeQuery()){
                 if(rs.next()){
-                    return new Dependente(rs.getInt("codDependente"),rs.getString("nome"), rs.getString("sexo"),rs.getDate("dataNascimento"),rs.getString("parentesco"),emp.searchID(rs.getInt("codEmpregado")) ));
+                    return new Dependente(rs.getInt("codDependente"),rs.getString("nome"), rs.getString("sexo"),rs.getDate("dataNascimento"),rs.getString("parentesco"),emp.searchID(rs.getInt("codEmpregado")));
                 }
+            }
         }catch(SQLException s){
             throw new DbException(s.getMessage());
         }
         return null;
-    }
     }
     public void remove(int id)throws DbException{
         String sql = "Delete from dependente where codDependente = ?";
@@ -84,5 +84,4 @@ public class DependenteDAO {
             throw new DbException(s.getMessage());
         }
     }
-
 }
