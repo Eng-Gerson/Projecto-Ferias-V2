@@ -52,8 +52,8 @@ CREATE TABLE projecto (
 -- Tabela chefia (chefe de departamento - relação 1:1)
 -- -----------------------------------------------------
 CREATE TABLE chefia (
-  codEmpregado    INT(11) NOT NULL,
-  codDepartamento INT(11) NOT NULL,
+  codEmpregado    INT(11) NOT NULL UNIQUE,
+  codDepartamento INT(11) NOT NULL UNIQUE,
   dataInicio      DATE NULL,
   designacao      VARCHAR(15) NOT NULL,
   PRIMARY KEY (codEmpregado, codDepartamento),

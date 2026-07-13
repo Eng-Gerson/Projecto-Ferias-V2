@@ -25,7 +25,6 @@ public class EmpregadoDAO{
 		}
 		
 	}
-	
 	public ArrayList<Empregado> list()throws DbException{
 		ArrayList<Empregado> lista = new ArrayList<>();
 		String sql = "select * from empregado ";
@@ -38,7 +37,7 @@ public class EmpregadoDAO{
 		}
 		return lista;
 	}
-	public Empregado searchID(int id)throws Exception{
+	public Empregado searchID(int id)throws DbException{
 		String sql = "select * from empregado where codEmpregado = ?";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
 ){
