@@ -73,7 +73,7 @@ public class ChefiaDAO {
             if(linhas > 0){
                 System.out.println("Chefe despromovido com sucesso!");
             } else {
-                System.out.println("O empregado não é chefe");
+                System.out.println("O departamento não tem chefe");
             }
         } catch(SQLException s){
             throw new DbException("Erro ao despromover o empregado: "+s.getMessage());
