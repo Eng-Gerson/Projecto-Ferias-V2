@@ -13,7 +13,7 @@ O projecto tem finalidade academica.
 ## Configurar User
 Se você quer usar um user diferente do "root" sem password, vá no src/database/db.properties no ficheiro "db.properties" coloque o nome do user e a sua password.
 ## Como utilizar?
-1. Ligue o MySQL. (Se você usa xampp é só clicar em start no xampp, de contrário podia activa-lo no services que pode ser acessado atráves do task manager)
+1. Ligue o MySQL. (Se você usa xampp é só clicar em start no xampp, de contrário pode activa-lo nos serviços)
 2. Execute os dois códigos .sql na pasta "MySQL", no mysql workbench ou no xampp. Começando do ficheiro "Criar tabela.sql"
 3. Vá para src/app e rode o Main.java
 
