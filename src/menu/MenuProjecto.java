@@ -23,7 +23,7 @@ public class MenuProjecto {
              case 5: Buscar();break;
              default: IO.println("Saindo..."); break;
             }
-        } while(op > 1 && op < 6);
+        } while(op > 0 && op < 6);
     }
 
     private static void Actualizar() throws Exception{
