@@ -24,6 +24,6 @@ public class MenuPrincipal {
 					IO.println("Encerrando o programa...");
 					break;
 			}
-		} while(op > 0 && op < 3);
+		} while(op > 0 && op <= 3);
 	}
 }
