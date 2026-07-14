@@ -61,8 +61,7 @@ public class SubMenuChefia {
             System.out.println("Não existe departamento com esse código");
             return;
         }
-        String dt = io.enterString("Insira a data de inicio  \"aaaa-mm-dd\"");
-        Date data =  Date.valueOf(dt);
+        Date data =  io.enterDate("Insira a data de inicio \"dd/MM/aaaa\"");
         String design = io.enterString("Insira a designação");
         chefe.add(new Chefia(empregado,departamento,data,design));
     }
@@ -98,8 +97,7 @@ public class SubMenuChefia {
                 System.out.println("Não existe empregado com esse código");
                 return;
             }
-            String dt = io.enterString("Insira a data de inicio  \"aaaa-mm-dd\"");
-            Date data =  Date.valueOf(dt);
+            Date data =  io.enterDate("Insira a data de inicio \"dd/MM/aaaa\"");
             String design = io.enterString("Insira a designação");
             chefe.update(id,new Chefia(empregado,dep.searchID(id),data,design));
         } else {

@@ -14,6 +14,7 @@ public class ProjectoDAO {
             stmt.setString(2,p.getLocalizacao());
             stmt.setInt(3,p.getDepartamento().getCodDepartamento());
             stmt.executeUpdate();
+            System.out.println("Projecto criado com sucesso!");
         }catch(SQLException s){
             throw new DbException(s.getMessage());
         }

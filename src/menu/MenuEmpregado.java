@@ -48,8 +48,7 @@ public class MenuEmpregado {
 		String nome = io.enterString("Insira o 1º nome");
 		String apelido = io.enterString("Insira o apelido");
 		double salario = io.enterDouble("Insira o salário");
-		String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-		Date data =  Date.valueOf(dt);
+		Date data = io.enterDate("Insira a data de Nascimento \"dd/MM/aaaa\"");
 		Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
 		emp.add(new Empregado(nome,apelido,salario,data,dpt));
 		
@@ -77,8 +76,7 @@ public class MenuEmpregado {
 			String nome = io.enterString("Insira o 1º nome");
 			String apelido = io.enterString("Insira o apelido");
 			double salario = io.enterDouble("Insira o salário");
-			String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-			Date data = Date.valueOf(dt);
+			Date data = io.enterDate("Insira a data de Nascimento \"dd/MM/aaaa\"");
 			Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
 			emp.update(id, new Empregado(nome, apelido, salario, data, dpt));
 		} else {

@@ -30,8 +30,7 @@ public class MenuProjecto {
         int index = io.enterInt("Insira o código do projecto a ser actualizado");
         if(proj.searchID(index) != null) {
             String loc = io.enterString("Insira a localização do projecto");
-            String dt = io.enterString("Insira a data de Inicio \"aaaa-mm-dd\"");
-            Date data = Date.valueOf(dt);
+            Date data = io.enterDate("Insira a data de Inicio \"dd/MM/aaaa\"");
             int codDep = io.enterInt("Insira o código do departamento");
             proj.update(new Projecto(data, loc, dep.searchID(codDep)), index);
         } else {
@@ -63,8 +62,7 @@ public class MenuProjecto {
 
     private static void inserir() throws Exception{
         String loc = io.enterString("Insira a localização do projecto");
-        String dt = io.enterString("Insira a data de Inicio \"aaaa-mm-dd\"");
-        Date data =  Date.valueOf(dt);
+        Date data = io.enterDate("Insira a data de Inicio \"dd/MM/aaaa\"");
         int codDep = io.enterInt("Insira o código do departamento");
         proj.add(new Projecto(data,loc,dep.searchID(codDep)));
     }

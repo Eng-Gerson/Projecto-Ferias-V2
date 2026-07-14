@@ -51,8 +51,7 @@ public class SubMenuDependente {
     private static void inserir()throws Exception{
         String nome = io.enterString("Insira o 1º nome");
         String sexo = io.enterString("Insira o sexo");
-        String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-        Date data =  Date.valueOf(dt);
+        Date data = io.enterDate("Insira a data de Nascimento  \"dd/MM/aaaa\"");
         String parente = io.enterString("Insira o parentesco");
         Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
         dep.add(new Dependente(nome,sexo,data,parente,empreg));
@@ -84,8 +83,7 @@ public class SubMenuDependente {
         if(dep.searchID(id) != null) {
             String nome = io.enterString("Insira o 1º nome");
             String sexo = io.enterString("Insira o sexo");
-            String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-            Date data =  Date.valueOf(dt);
+            Date data = io.enterDate("Insira a data de Nascimento  \"dd/MM/aaaa\"");
             String parente = io.enterString("Insira o parentesco");
             Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
             dep.update(id,new Dependente(nome,sexo,data,parente,empreg));

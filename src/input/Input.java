@@ -2,53 +2,93 @@ package input;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.time.format.DateTimeFormatter;
+
 public class Input {
      public static BufferedReader sc = new BufferedReader(new InputStreamReader(System.in));
-     public int enterInt(String msg)throws IOException{
-          System.out.println(msg);
-          int i = Integer.parseInt(sc.readLine());
-          return i;
+
+     public int enterInt(String msg) throws IOException {
+          while (true) {
+               try {
+                    System.out.println(msg);
+                   return Integer.parseInt(sc.readLine());
+               } catch (NumberFormatException n) {
+                    System.out.println("Erro, não pode estar vazio e deve ser um número inteiro.\n" + n.getMessage());
+               }
+          }
      }
 
-     public String enterString(String msg)throws IOException{
-          System.out.println(msg);
-          String i = sc.readLine();
-          return i;
+     public String enterString(String msg) throws IOException {
+          while(true) {
+               System.out.println(msg);
+               String i = sc.readLine();
+               if(i != null) {
+                    return sc.readLine();
+               }
+               System.out.println("Erro, não pode estar vazio");
+          }
      }
 
-     public float enterFloat(String msg)throws IOException{
-          System.out.println(msg);
-          float i = Float.parseFloat(sc.readLine());
-          return i;
+     public float enterFloat(String msg) throws IOException {
+          while (true) {
+               try {
+                    System.out.println(msg);
+                   return Float.parseFloat(sc.readLine());
+               } catch (NumberFormatException n) {
+                    System.out.println("Erro, não pode estar vazio e deve ser um número.\n" + n.getMessage());
+               }
+          }
      }
 
-     public byte enterByte(String msg)throws IOException{
+     public byte enterByte(String msg) throws IOException {
           System.out.println(msg);
-          byte i = Byte.parseByte(sc.readLine());
-          return i;
+         return Byte.parseByte(sc.readLine());
      }
 
-     public long enterLong(String msg)throws IOException{
+     public long enterLong(String msg) throws IOException {
           System.out.println(msg);
-          long i = Long.parseLong(sc.readLine());
-          return i;
+         return Long.parseLong(sc.readLine());
      }
 
-     public char enterChar(String msg)throws IOException{
+     public char enterChar(String msg) throws IOException {
           System.out.println(msg);
           String enter = sc.readLine();
-          char i = enter.charAt(0);
-          return i;
+         return enter.charAt(0);
      }
-	 
-	 public double enterDouble(String msg)throws IOException{
-		System.out.println(msg);
-		double i = Double.parseDouble(sc.readLine());
-		return i;
-	 }
-      public boolean enterBoolean(String msg)throws IOException{
+
+     public double enterDouble(String msg) throws IOException {
+          while (true) {
+               try {
+                    System.out.println(msg);
+                   return Double.parseDouble(sc.readLine());
+               } catch (NumberFormatException n) {
+                    System.out.println("Erro, não pode estar vazio e deve ser um número.\n" + n.getMessage());
+               }
+          }
+     }
+
+     public boolean enterBoolean(String msg) throws IOException {
           System.out.println(msg);
-          boolean i = Boolean.parseBoolean(sc.readLine());
-          return i;
-      }
+         return Boolean.parseBoolean(sc.readLine());
+     }
+
+     public Date enterDate(String msg) throws IOException {
+          while (true) {
+               try {
+                    System.out.println(msg);
+                    String dt = sc.readLine();
+                    DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    LocalDate ldt = LocalDate.parse(dt,format);
+                    if(ldt.getYear() > 1920) {
+                         return Date.valueOf(ldt);
+                    }
+                    System.out.println("Insira novamente, essa data é absurda");
+               } catch (DateTimeParseException e) {
+                    System.out.println("Data inválida: \n"+e.getMessage());
+               }
+          }
+     }
 }
