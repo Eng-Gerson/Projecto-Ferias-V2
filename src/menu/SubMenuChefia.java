@@ -6,6 +6,7 @@ import exception.DbException;
 import input.Input;
 import model.Departamento;
 import model.Empregado;
+import model.Chefia;
 
 import java.sql.Date;
 import java.util.ArrayList;
@@ -18,7 +19,7 @@ public class SubMenuChefia {
     public static void exibir()throws Exception {
         int op;
         do {
-            op = io.enterInt("----- Chefia ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Chefe de Departamento \n5-Actualizar \nOutro - Sair");
+            op = io.enterInt("----- Chefia ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Chefe por Departamento \n5-Buscar Chefe por Empregado \n6-Actualizar \nOutro - Sair");
             switch (op) {
                 case 1:
                     Inserir();
@@ -30,62 +31,79 @@ public class SubMenuChefia {
                     Listar();
                     break;
                 case 4:
-                    Buscar();
+                    BuscarDepartamento();
                     break;
                 case 5:
+                    BuscarEmpregado();
+                    break;
+                case 6:
                     Actualizar();
                     break;
                 default:
-                    IO.println("Está Nice");
+                    IO.println("Saindo...");
                     break;
             }
-        }while(op > 0 && op < 6);
+        }while(op > 0 && op < 7);
     }
 
     private static void Remover()throws Exception{
-        int id = io.enterInt("Insira o código do empregado a ser removido");
-        emp.remove(id);
+        int id = io.enterInt("Insira o código do departamento ao qual o chefe será despromovido");
+        chefe.removeByDepartamento(id);
     }
-
     private static void Inserir()throws Exception{
-        String nome = io.enterString("Insira o 1º nome");
-        String apelido = io.enterString("Insira o apelido");
-        double salario = io.enterDouble("Insira o salário");
-        String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
+        Empregado empregado = emp.searchID(io.enterInt("Insira o código do empregado"));
+        if(empregado == null){
+            System.out.println("Não existe empregado com esse código");
+            return;
+        }
+        Departamento departamento = dep.searchID(io.enterInt("Insira o código do departamento"));
+        if(departamento == null){
+            System.out.println("Não existe departamento com esse código");
+            return;
+        }
+        String dt = io.enterString("Insira a data de inicio  \"aaaa-mm-dd\"");
         Date data =  Date.valueOf(dt);
-        Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
-        emp.add(new Empregado(nome,apelido,salario,data,dpt));
-
+        String design = io.enterString("Insira a designação");
+        chefe.add(new Chefia(empregado,departamento,data,design));
     }
-
     private static void Listar()throws DbException {
-        ArrayList<Empregado> listagem = emp.list();
-        for(Empregado e : listagem){
-            IO.println(e);
+        ArrayList<Chefia> listagem = chefe.list();
+        for(Chefia c : listagem){
+            IO.println(c);
         }
     }
-    public static void Buscar()throws Exception{
+    public static void BuscarDepartamento()throws Exception{
+        int id = io.enterInt("Insira o código do departamento");
+        Chefia chef = chefe.searchByDepartamento(id);
+        if(chef == null){
+            System.out.println("O departamento não tem chefe!");
+        } else {
+            IO.println(chef.toString());
+        }
+    }
+    public static void BuscarEmpregado()throws Exception{
         int id = io.enterInt("Insira o código do empregado");
-        Empregado empregado = emp.searchID(id);
+        Chefia empregado = chefe.searchByEmpregado(id);
         if(empregado == null){
-            System.out.println("O empregado não existe!");
+            System.out.println("O empregado não é chefe de nenhum departamento!");
         } else {
             IO.println(empregado.toString());
         }
     }
-
     private static void Actualizar()throws Exception{
-        int id = io.enterInt("Insira o código do empregado a ser actualizado");
-        if(emp.searchID(id) != null) {
-            String nome = io.enterString("Insira o 1º nome");
-            String apelido = io.enterString("Insira o apelido");
-            double salario = io.enterDouble("Insira o salário");
-            String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-            Date data = Date.valueOf(dt);
-            Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
-            emp.update(id, new Empregado(nome, apelido, salario, data, dpt));
+        int id = io.enterInt("Insira o código do departamento ao qual deseja trocar o chefe");
+        if(chefe.searchByDepartamento(id) != null) {
+            Empregado empregado = emp.searchID(io.enterInt("Insira o código do empregado"));
+            if(empregado == null){
+                System.out.println("Não existe empregado com esse código");
+                return;
+            }
+            String dt = io.enterString("Insira a data de inicio  \"aaaa-mm-dd\"");
+            Date data =  Date.valueOf(dt);
+            String design = io.enterString("Insira a designação");
+            chefe.update(id,new Chefia(empregado,dep.searchID(id),data,design));
         } else {
-            IO.println("Não existe empregado com esse código");
+            IO.println("O departamento não tem chefe ou não existe");
         }
     }
 }

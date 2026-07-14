@@ -1,9 +1,7 @@
 package database;
 
 import exception.DbException;
-import model.Empregado;
 import model.Chefia;
-import model.Departamento;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +11,7 @@ public class ChefiaDAO {
     private static final DepartamentoDAO dep = new DepartamentoDAO();
     private static final EmpregadoDAO emp = new EmpregadoDAO();
     public void add(Chefia chefe)throws DbException{
-        String sql = "INSERT INTO chefia VALUES (?,?,?,?) ";
+        String sql = "INSERT INTO chefia(codEmpregado,codDepartamento,dataInicio,designacao) VALUES (?,?,?,?) ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1, chefe.getEmpregado().getCodEmpregado());
             stmt.setInt(2, chefe.getDepartamento().getCodDepartamento());
@@ -37,7 +35,7 @@ public class ChefiaDAO {
         }
         return lista;
     }
-    public Chefia searchID(int id)throws DbException{
+    public Chefia searchByDepartamento(int id)throws DbException{
         String sql = "select * from chefia where codDepartamento = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
         ){
@@ -52,10 +50,25 @@ public class ChefiaDAO {
         }
         return null;
     }
-    public void remove(int id)throws DbException{
-        String sql = "Delete from chefia where codEmpregado = ?";
-        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
+    public Chefia searchByEmpregado(int id)throws DbException{
+        String sql = "select * from chefia where codEmpregado = ?";
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
+        ){
             stmt.setInt(1,id);
+            try(ResultSet rs = stmt.executeQuery()){
+                if(rs.next()){
+                    return new Chefia(emp.searchID(rs.getInt("codEmpregado")),dep.searchID(rs.getInt("codDepartamento")),rs.getDate("dataInicio"), rs.getString("designacao"));
+                }
+            }
+        }catch(SQLException s){
+            throw new DbException(s.getMessage());
+        }
+        return null;
+    }
+    public void removeByDepartamento(int codDepartamento)throws DbException{
+        String sql = "Delete from chefia where codDepartamento = ?";
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
+            stmt.setInt(1,codDepartamento);
             int linhas = stmt.executeUpdate();
             if(linhas > 0){
                 System.out.println("Chefe despromovido com sucesso!");
@@ -67,13 +80,12 @@ public class ChefiaDAO {
         }
     }
     public void update(int id,Chefia chefe)throws DbException{
-        String sql = "Update chefia set codEmpregado = ?,codDepartamento = ?,dataInicio = ?,designacao = ? where codDepartamento = ? ";
+        String sql = "Update chefia set codEmpregado = ?,dataInicio = ?,designacao = ? where codDepartamento = ? ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1, chefe.getEmpregado().getCodEmpregado());
-            stmt.setInt(2, chefe.getDepartamento().getCodDepartamento());
-            stmt.setDate(3, chefe.getDataInicio());
-            stmt.setString(4, chefe.getDesignacao());
-            stmt.setInt(5,id);
+            stmt.setDate(2, chefe.getDataInicio());
+            stmt.setString(3, chefe.getDesignacao());
+            stmt.setInt(4,id);
             int linhas = stmt.executeUpdate();
             if(linhas > 0){
                 IO.println("Chefe actualizado com sucesso!");

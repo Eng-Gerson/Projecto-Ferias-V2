@@ -17,7 +17,7 @@ public class SubMenuDependente {
     public static void exibir()throws Exception {
         int op;
         do {
-            op = io.enterInt("----- Dependente ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Dependente \n5-Actualizar \nOutro - Sair");
+            op = io.enterInt("----- Dependente ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Dependente \n5-Buscar Dependente por Empregado \n6-Actualizar \nOutro - Sair");
             switch (op) {
                 case 1:
                     Inserir();
@@ -32,59 +32,65 @@ public class SubMenuDependente {
                     Buscar();
                     break;
                 case 5:
+                    ListarEmpregado();
+                    break;
+                case 6:
                     Actualizar();
                     break;
                 default:
-                    IO.println("Está Nice");
+                    IO.println("Saindo...");
                     break;
             }
-        }while(op > 0 && op < 6);
+        }while(op > 0 && op < 7);
     }
 
     private static void Remover()throws Exception{
-        int id = io.enterInt("Insira o código do empregado a ser removido");
-        emp.remove(id);
+        int id = io.enterInt("Insira o código do dependente a ser removido");
+        dep.remove(id);
     }
-
     private static void Inserir()throws Exception{
         String nome = io.enterString("Insira o 1º nome");
-        String apelido = io.enterString("Insira o apelido");
-        double salario = io.enterDouble("Insira o salário");
+        String sexo = io.enterString("Insira o sexo");
         String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
         Date data =  Date.valueOf(dt);
-        Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
-        emp.add(new Empregado(nome,apelido,salario,data,dpt));
-
+        String parente = io.enterString("Insira o parentesco");
+        Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
+        dep.add(new Dependente(nome,sexo,data,parente,empreg));
     }
-
     private static void Listar()throws DbException {
-        ArrayList<Empregado> listagem = emp.list();
-        for(Empregado e : listagem){
-            IO.println(e);
+        ArrayList<Dependente> listagem = dep.list();
+        for(Dependente d : listagem){
+            IO.println(d);
+        }
+    }
+    private static void ListarEmpregado()throws Exception {
+        int id = io.enterInt("Insira o código do Empregado e eu listarei os dependentes");
+        ArrayList<Dependente> listagem = dep.listByEmpregado(id);
+        for(Dependente d : listagem){
+            IO.println(d);
         }
     }
     public static void Buscar()throws Exception{
-        int id = io.enterInt("Insira o código do empregado");
-        Empregado empregado = emp.searchID(id);
-        if(empregado == null){
-            System.out.println("O empregado não existe!");
+        int id = io.enterInt("Insira o código do dependente");
+        Dependente dependente = dep.searchID(id);
+        if(dependente == null){
+            System.out.println("O dependente não existe!");
         } else {
-            IO.println(empregado.toString());
+            IO.println(dependente.toString());
         }
     }
-
     private static void Actualizar()throws Exception{
-        int id = io.enterInt("Insira o código do empregado a ser actualizado");
-        if(emp.searchID(id) != null) {
+        int id = io.enterInt("Insira o código do dependente a ser actualizado");
+        if(dep.searchID(id) != null) {
             String nome = io.enterString("Insira o 1º nome");
-            String apelido = io.enterString("Insira o apelido");
-            double salario = io.enterDouble("Insira o salário");
+            String sexo = io.enterString("Insira o sexo");
             String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
-            Date data = Date.valueOf(dt);
-            Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
-            emp.update(id, new Empregado(nome, apelido, salario, data, dpt));
+            Date data =  Date.valueOf(dt);
+            String parente = io.enterString("Insira o parentesco");
+            Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
+            dep.update(id,new Dependente(nome,sexo,data,parente,empreg));
         } else {
-            IO.println("Não existe empregado com esse código");
+            IO.println("Não existe dependente com esse código");
         }
     }
 }

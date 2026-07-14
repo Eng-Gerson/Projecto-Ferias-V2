@@ -28,10 +28,6 @@ public class Empregado {
 		return codEmpregado;
 	}
 
-	public void setCodEmpregado(int codEmpregado) {
-		this.codEmpregado = codEmpregado;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -44,24 +40,12 @@ public class Empregado {
 		return apelido;
 	}
 
-	public void setApelido(String apelido) {
-		this.apelido = apelido;
-	}
-
 	public double getSalario() {
 		return salario;
 	}
 
-	public void setSalario(double salario) {
-		this.salario = salario;
-	}
-
 	public Date getDataNascimento() {
 		return dataNascimento;
-	}
-
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
 	}
 
 	public Departamento getDepartamento() {
@@ -74,8 +58,7 @@ public class Empregado {
 
 	@Override
 	public String toString() {
-		return  "CodEmpregado: " + codEmpregado + " Nome:" + nome + " Apelido:" + apelido + " Salário:" + salario + " DataNascimento:" + dataNascimento + " Departamento: "+ departamento.getNome();
+		return  "Código do Empregado: " + codEmpregado + " Nome Completo:" + nome +" "+ apelido + " Salário:" + salario + " DataNascimento:" + dataNascimento + " Departamento: "+ departamento.getNome();
 	}
 
-	
 }

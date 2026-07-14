@@ -17,7 +17,7 @@ public class DataBase {
 				System.out.println("Connection succesful!");
 			}
 			catch(SQLException e){
-				throw new DbException(e.getMessage());
+				throw new DbException("A comunicação com o banco de dados falhou \n"+e.getMessage());
 			} 
 		}
 		return conn;

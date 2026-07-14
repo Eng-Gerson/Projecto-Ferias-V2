@@ -14,7 +14,7 @@ public class MenuDepartamento {
     public static void exibir() throws Exception {
         int op;
         do {
-            op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1- Adicionar \n2- Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6- Buscar por ID \n7-Mostrar Projectos \nOutro- Sair");
+            op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1-Adicionar \n2-Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6-Buscar por Código \n7-Mostrar Projectos \n8-Chefia \nOutro- Sair");
             switch (op) {
                 case 1:
                     Inserir();
@@ -35,11 +35,14 @@ public class MenuDepartamento {
                     Buscar();
                     break;
                 case 7:
-                    MostrarProjecto();
+                    MostrarProjecto(); break;
+                case 8:
+                    SubMenuChefia.exibir(); break;
                 default:
+                    System.out.println("Saindo...");
                     break;
             }
-        }while(op > 0 && op < 8);
+        }while(op > 0 && op < 9);
     }
 
     private static void Buscar() throws Exception {
@@ -60,7 +63,7 @@ public class MenuDepartamento {
             IO.println("Das duas uma, ou o departamento não existe ou não tem empregados");
         } else {
             for (Empregado e : empregados) {
-                System.out.println("CodEmpregado: "+e.getCodEmpregado()+ "Nome: "+e.getNome());
+                System.out.println("CodEmpregado: "+e.getCodEmpregado()+ " Nome Completo: "+e.getNome()+" "+e.getApelido());
             }
         }
     }

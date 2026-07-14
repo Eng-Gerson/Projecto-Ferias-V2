@@ -3,7 +3,6 @@ import input.Input;
 import model.Projecto;
 import database.ProjectoDAO;
 import java.util.ArrayList;
-import model.Departamento;
 import database.DepartamentoDAO;
 
 import java.sql.Date;
@@ -15,15 +14,15 @@ public class MenuProjecto {
     public static void exibir() throws Exception{
         int op;
         do {
-        op = io.enterInt("-------- MENU PROJECTO -------- \n1-Criar Projecto \n2-Remover \n3-Listar Projectos \n4-Actualizar Projecto \n5-Buscar pelo ID");
-        switch(op){
-            case 1: Inserir();break;
-            case 2: Remover();break;
-            case 3: Listar();break;
-            case 4: Actualizar();break;
-            case 5: Buscar();break;
-            default: IO.println("OK"); break;
-        }
+        op = io.enterInt("-------- MENU PROJECTO -------- \n1-Criar Projecto \n2-Remover \n3-Listar Projectos \n4-Actualizar Projecto \n5-Buscar pelo ID \nOutro-Sair");
+            switch(op){
+             case 1: Inserir();break;
+             case 2: Remover();break;
+             case 3: Listar();break;
+             case 4: Actualizar();break;
+             case 5: Buscar();break;
+             default: IO.println("Saindo..."); break;
+            }
         } while(op > 1 && op < 6);
     }
 

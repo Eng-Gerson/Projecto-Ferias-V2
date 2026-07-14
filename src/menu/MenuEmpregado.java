@@ -13,7 +13,7 @@ public class MenuEmpregado {
     public static void exibir()throws Exception {
 		int op;
 		do {
-			op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Empregado \n5-Actualizar \nOutro - Sair");
+			op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar por Código \n5-Actualizar \n6-Dependentes \nOutro - Sair");
 			switch (op) {
 				case 1:
 					Inserir();
@@ -30,11 +30,13 @@ public class MenuEmpregado {
 				case 5:
 					Actualizar();
 					break;
+				case 6:
+					SubMenuDependente.exibir(); break;
 				default:
-					IO.println("Está Nice");
+					IO.println("Saindo...");
 					break;
 			}
-		}while(op > 0 && op < 6);
+		}while(op > 0 && op < 7);
 	}
 
 	private static void Remover()throws Exception{

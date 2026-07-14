@@ -92,7 +92,7 @@ public class DepartamentoDAO {
     }
     public ArrayList<Projecto> listaProjecto(int index)throws DbException{
         ArrayList<Projecto> proj = new ArrayList<>();
-        String sql = "select * from empregado where codDepartamento = ?";
+        String sql = "select * from projecto where codDepartamento = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()){

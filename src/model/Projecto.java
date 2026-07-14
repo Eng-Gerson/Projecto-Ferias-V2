@@ -1,6 +1,5 @@
 package model;
 import java.sql.Date;
-import model.Departamento;
 public class Projecto {
     private int codProjecto;
     private Date dataInicio;
@@ -24,24 +23,12 @@ public class Projecto {
         return codProjecto;
     }
 
-    public void setCodProjecto(int codProjecto) {
-        this.codProjecto = codProjecto;
-    }
-
     public Date getDataInicio() {
         return dataInicio;
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
-    }
-
     public String getLocalizacao() {
         return localizacao;
-    }
-
-    public void setLocalizacao(String localizacao) {
-        this.localizacao = localizacao;
     }
 
     public Departamento getDepartamento() {
@@ -54,9 +41,9 @@ public class Projecto {
 
     @Override
     public String toString() {
-        return "codProjecto=" + codProjecto +
-                ", dataInicio=" + dataInicio +
-                ", localizacao='" + localizacao + '\'' +
-                ", departamento=" + departamento;
+        return "Código do Projecto: " + codProjecto +
+                " Data de Inicio:" + dataInicio +
+                " Localização: " + localizacao +
+                " Departamento: " + departamento.getNome();
     }
 }

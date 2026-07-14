@@ -16,6 +16,13 @@ public class Dependente {
         this.parentesco = parentesco;
         this.empregado = empregado;
     }
+    public Dependente(String nome, String sexo, Date dataNascimento, String parentesco, Empregado empregado) {
+        this.nome = nome;
+        this.sexo = String.valueOf(sexo.charAt(0));
+        this.dataNascimento = dataNascimento;
+        this.parentesco = parentesco;
+        this.empregado = empregado;
+    }
 
     public int getCodDependente() {
         return codDependente;
@@ -43,13 +50,11 @@ public class Dependente {
 
     @Override
     public String toString() {
-        return "Dependente{" +
-                "codDependente=" + codDependente +
-                ", nome='" + nome + '\'' +
-                ", sexo=" + sexo +
-                ", dataNascimento=" + dataNascimento +
-                ", parentesco='" + parentesco + '\'' +
-                ", empregado=" + empregado +
-                '}';
+        return "Código do Dependente: " + codDependente +
+                " Nome: " + nome +
+                " Sexo: " + sexo +
+                " Data de Nascimento: " + dataNascimento +
+                " Parentesco: " + parentesco +
+                " Empregado: " + empregado.getNome()+" "+empregado.getApelido();
     }
 }

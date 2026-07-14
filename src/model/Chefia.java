@@ -1,10 +1,10 @@
 package model;
 import java.sql.Date;
 public class Chefia {
-    private Empregado empregado;
-    private Departamento departamento;
-    private Date dataInicio;
-    private String designacao;
+    private  Empregado empregado;
+    private  Departamento departamento;
+    private  Date dataInicio;
+    private  String designacao;
     public Chefia(Empregado e,Departamento d,Date data,String design){
         this.empregado = e;
         this.departamento = d;
@@ -30,8 +30,8 @@ public class Chefia {
 
     @Override
     public String toString(){
-        return "Empregado: "+empregado.getNome()+" Código: "+empregado.getCodEmpregado()
+        return "Empregado: "+empregado.getNome()+" "+empregado.getApelido()+" Código: "+empregado.getCodEmpregado()
                 +" Departamento: "+departamento.getNome()+" Código: "+departamento.getCodDepartamento()
-                +" Designacao: "+designacao+" Data Início: "+dataInicio;
+                +" Designacao: "+designacao+" Data de Início: "+dataInicio;
     }
 }

@@ -1,7 +1,6 @@
 package database;
 
 import exception.DbException;
-import model.Empregado;
 import model.Dependente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -30,6 +29,21 @@ public class DependenteDAO {
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql); ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
                 lista.add(new Dependente(rs.getInt("codDependente"),rs.getString("nome"), rs.getString("sexo"),rs.getDate("dataNascimento"),rs.getString("parentesco"),emp.searchID(rs.getInt("codEmpregado")) ));
+            }
+        }catch(SQLException e){
+            throw new DbException("Erro:"+e.getMessage());
+        }
+        return lista;
+    }
+    public ArrayList<Dependente> listByEmpregado(int id)throws DbException{
+        ArrayList<Dependente> lista = new ArrayList<>();
+        String sql = "select * from dependente where codEmpregado = ?";
+        try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
+            stmt.setInt(1,id);
+            try( ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(new Dependente(rs.getInt("codDependente"), rs.getString("nome"), rs.getString("sexo"), rs.getDate("dataNascimento"), rs.getString("parentesco"), emp.searchID(rs.getInt("codEmpregado"))));
+                }
             }
         }catch(SQLException e){
             throw new DbException("Erro:"+e.getMessage());
