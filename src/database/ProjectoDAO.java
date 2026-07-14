@@ -47,7 +47,7 @@ public class ProjectoDAO {
         }
     }
     public void update(Projecto p,int index) throws DbException{
-        String sql = "Update from projecto set dataInicio = ?,localizacao = ?,codDepartamento = ? where codProjecto = ?";
+        String sql = "UPDATE projecto SET dataInicio = ?, localizacao = ?, codDepartamento = ? WHERE codProjecto = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(4,p.getCodProjecto());
             stmt.setDate(1,p.getDataInicio());

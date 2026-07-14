@@ -1,2 +1,9 @@
+# Compiled bytecode
 /out/
 
+# IntelliJ IDEA (config local do teu ambiente, não pertence ao repo)
+.idea/
+*.iml
+
+# Credenciais locais da base de dados
+src/database/db.properties

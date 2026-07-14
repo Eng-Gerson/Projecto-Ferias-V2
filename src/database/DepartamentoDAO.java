@@ -33,7 +33,7 @@ public class DepartamentoDAO {
         }
     }
     public void update(String nome,int index)throws DbException{
-        String sql = "Update from departamento set nome = ? where codDepartamento = ?";
+        String sql = "UPDATE departamento SET nome = ? WHERE codDepartamento = ?";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setString(1,nome);
             stmt.setInt(2,index);

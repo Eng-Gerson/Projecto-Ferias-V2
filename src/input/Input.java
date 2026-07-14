@@ -25,8 +25,8 @@ public class Input {
           while(true) {
                System.out.println(msg);
                String i = sc.readLine();
-               if(i != null) {
-                    return sc.readLine();
+               if(i != null && !i.isBlank()) {
+                    return i;
                }
                System.out.println("Erro, não pode estar vazio");
           }

@@ -59,7 +59,7 @@ public class MenuDepartamento {
     private static void mostrarEmpregado() throws Exception {
         int index = io.enterInt("Insira o código do departamento e eu te mostrarei os funcionários lá");
         ArrayList<Empregado> empregados = dep.listaEmpregado(index);
-        if(empregados == null){
+        if(empregados.isEmpty()){
             IO.println("Das duas uma, ou o departamento não existe ou não tem empregados");
         } else {
             for (Empregado e : empregados) {
@@ -96,7 +96,7 @@ public class MenuDepartamento {
     private static void mostrarProjecto() throws Exception {
         int index = io.enterInt("Insira o código do departamento e eu te mostrarei os projectos associados");
         ArrayList<Projecto> projectos = dep.listaProjecto(index);
-        if(projectos == null){
+        if(projectos.isEmpty()){
             IO.println("Das duas uma, ou o departamento não existe ou não tem projectos associados");
         } else {
             for (Projecto p : projectos) {
