@@ -2,7 +2,7 @@
 Esse projecto foi feito no Intellij
 O primeiro repositório foi feito usando NetBeans se voce usa IntelliJ copie este repositório.
 O projecto tem finalidade academica. 
-Algumas tabelas que estão nos ficheiros SQL não serão implementados, o foco eram as classes "maiores" (Departamento,Empregado,Projecto,Chefia e Dependente).
+Algumas tabelas que estão nos ficheiros SQL não serão implementadas, o foco eram as classes principais a saber Departamento,Empregado,Projecto,Chefia e Dependente.
 
 
 ## Requisitos
