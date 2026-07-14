@@ -16,17 +16,17 @@ public class MenuProjecto {
         do {
         op = io.enterInt("-------- MENU PROJECTO -------- \n1-Criar Projecto \n2-Remover \n3-Listar Projectos \n4-Actualizar Projecto \n5-Buscar pelo ID \nOutro-Sair");
             switch(op){
-             case 1: Inserir();break;
-             case 2: Remover();break;
-             case 3: Listar();break;
-             case 4: Actualizar();break;
-             case 5: Buscar();break;
+             case 1: inserir();break;
+             case 2: remover();break;
+             case 3: listar();break;
+             case 4: actualizar();break;
+             case 5: buscar();break;
              default: IO.println("Saindo..."); break;
             }
         } while(op > 0 && op < 6);
     }
 
-    private static void Actualizar() throws Exception{
+    private static void actualizar() throws Exception{
         int index = io.enterInt("Insira o código do projecto a ser actualizado");
         if(proj.searchID(index) != null) {
             String loc = io.enterString("Insira a localização do projecto");
@@ -39,7 +39,7 @@ public class MenuProjecto {
         }
     }
 
-    private static void Buscar() throws Exception{
+    private static void buscar() throws Exception{
         int index = io.enterInt("Insira o código do Projecto");
         Projecto project = proj.searchID(index);
         if(project != null) {
@@ -49,19 +49,19 @@ public class MenuProjecto {
         }
     }
 
-    private static void Remover() throws Exception{
+    private static void remover() throws Exception{
         int index = io.enterInt("Insira o código do Projecto que deseja remover");
         proj.remove(index);
     }
 
-    private static void Listar() throws Exception{
+    private static void listar() throws Exception{
         ArrayList<Projecto> project = proj.list();
         for(Projecto p : project){
             IO.println(p);
         }
     }
 
-    private static void Inserir() throws Exception{
+    private static void inserir() throws Exception{
         String loc = io.enterString("Insira a localização do projecto");
         String dt = io.enterString("Insira a data de Inicio \"aaaa-mm-dd\"");
         Date data =  Date.valueOf(dt);

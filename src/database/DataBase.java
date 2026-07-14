@@ -11,7 +11,7 @@ public class DataBase {
 	public static Connection getConnection()throws DbException{
 		if(conn == null){
 			try {
-				Properties props = LoadProperties();
+				Properties props = loadProperties();
 				String url = props.getProperty("dburl");
 				conn = DriverManager.getConnection(url,props);
 				System.out.println("Connection succesful!");
@@ -35,7 +35,7 @@ public class DataBase {
 		}
 	}
 
-	private static Properties LoadProperties() throws DbException{
+	private static Properties loadProperties() throws DbException{
 		try(FileInputStream fs = new FileInputStream("src/database/db.properties")){
 			Properties props = new Properties();
 			props.load(fs);

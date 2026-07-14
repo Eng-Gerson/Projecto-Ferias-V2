@@ -20,22 +20,22 @@ public class SubMenuDependente {
             op = io.enterInt("----- Dependente ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Dependente \n5-Buscar Dependente por Empregado \n6-Actualizar \nOutro - Sair");
             switch (op) {
                 case 1:
-                    Inserir();
+                    inserir();
                     break;
                 case 2:
-                    Remover();
+                    remover();
                     break;
                 case 3:
-                    Listar();
+                    listar();
                     break;
                 case 4:
-                    Buscar();
+                    buscar();
                     break;
                 case 5:
-                    ListarEmpregado();
+                    listarEmpregado();
                     break;
                 case 6:
-                    Actualizar();
+                    actualizar();
                     break;
                 default:
                     IO.println("Saindo...");
@@ -44,11 +44,11 @@ public class SubMenuDependente {
         }while(op > 0 && op < 7);
     }
 
-    private static void Remover()throws Exception{
+    private static void remover()throws Exception{
         int id = io.enterInt("Insira o código do dependente a ser removido");
         dep.remove(id);
     }
-    private static void Inserir()throws Exception{
+    private static void inserir()throws Exception{
         String nome = io.enterString("Insira o 1º nome");
         String sexo = io.enterString("Insira o sexo");
         String dt = io.enterString("Insira a data de Nascimento  \"aaaa-mm-dd\"");
@@ -57,20 +57,20 @@ public class SubMenuDependente {
         Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
         dep.add(new Dependente(nome,sexo,data,parente,empreg));
     }
-    private static void Listar()throws DbException {
+    private static void listar()throws DbException {
         ArrayList<Dependente> listagem = dep.list();
         for(Dependente d : listagem){
             IO.println(d);
         }
     }
-    private static void ListarEmpregado()throws Exception {
+    private static void listarEmpregado()throws Exception {
         int id = io.enterInt("Insira o código do Empregado e eu listarei os dependentes");
         ArrayList<Dependente> listagem = dep.listByEmpregado(id);
         for(Dependente d : listagem){
             IO.println(d);
         }
     }
-    public static void Buscar()throws Exception{
+    public static void buscar()throws Exception{
         int id = io.enterInt("Insira o código do dependente");
         Dependente dependente = dep.searchID(id);
         if(dependente == null){
@@ -79,7 +79,7 @@ public class SubMenuDependente {
             IO.println(dependente.toString());
         }
     }
-    private static void Actualizar()throws Exception{
+    private static void actualizar()throws Exception{
         int id = io.enterInt("Insira o código do dependente a ser actualizado");
         if(dep.searchID(id) != null) {
             String nome = io.enterString("Insira o 1º nome");

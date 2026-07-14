@@ -22,22 +22,22 @@ public class SubMenuChefia {
             op = io.enterInt("----- Chefia ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Chefe por Departamento \n5-Buscar Chefe por Empregado \n6-Actualizar \nOutro - Sair");
             switch (op) {
                 case 1:
-                    Inserir();
+                    inserir();
                     break;
                 case 2:
-                    Remover();
+                    remover();
                     break;
                 case 3:
-                    Listar();
+                    listar();
                     break;
                 case 4:
-                    BuscarDepartamento();
+                    buscarDepartamento();
                     break;
                 case 5:
-                    BuscarEmpregado();
+                    buscarEmpregado();
                     break;
                 case 6:
-                    Actualizar();
+                    actualizar();
                     break;
                 default:
                     IO.println("Saindo...");
@@ -46,11 +46,11 @@ public class SubMenuChefia {
         }while(op > 0 && op < 7);
     }
 
-    private static void Remover()throws Exception{
+    private static void remover()throws Exception{
         int id = io.enterInt("Insira o código do departamento ao qual o chefe será despromovido");
         chefe.removeByDepartamento(id);
     }
-    private static void Inserir()throws Exception{
+    private static void inserir()throws Exception{
         Empregado empregado = emp.searchID(io.enterInt("Insira o código do empregado"));
         if(empregado == null){
             System.out.println("Não existe empregado com esse código");
@@ -66,13 +66,13 @@ public class SubMenuChefia {
         String design = io.enterString("Insira a designação");
         chefe.add(new Chefia(empregado,departamento,data,design));
     }
-    private static void Listar()throws DbException {
+    private static void listar()throws DbException {
         ArrayList<Chefia> listagem = chefe.list();
         for(Chefia c : listagem){
             IO.println(c);
         }
     }
-    public static void BuscarDepartamento()throws Exception{
+    public static void buscarDepartamento()throws Exception{
         int id = io.enterInt("Insira o código do departamento");
         Chefia chef = chefe.searchByDepartamento(id);
         if(chef == null){
@@ -81,7 +81,7 @@ public class SubMenuChefia {
             IO.println(chef.toString());
         }
     }
-    public static void BuscarEmpregado()throws Exception{
+    public static void buscarEmpregado()throws Exception{
         int id = io.enterInt("Insira o código do empregado");
         Chefia empregado = chefe.searchByEmpregado(id);
         if(empregado == null){
@@ -90,7 +90,7 @@ public class SubMenuChefia {
             IO.println(empregado.toString());
         }
     }
-    private static void Actualizar()throws Exception{
+    private static void actualizar()throws Exception{
         int id = io.enterInt("Insira o código do departamento ao qual deseja trocar o chefe");
         if(chefe.searchByDepartamento(id) != null) {
             Empregado empregado = emp.searchID(io.enterInt("Insira o código do empregado"));
