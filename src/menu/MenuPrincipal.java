@@ -1,5 +1,6 @@
 package menu;
 import database.DataBase;
+import exception.DbException;
 import input.Input;
 //TODO refactorar os menus, observando os principios SOLID
 public class MenuPrincipal {
@@ -9,20 +10,24 @@ public class MenuPrincipal {
 		do {
 			DataBase.getConnection();
 			op = io.enterInt("========== MENU PRINCIPAL ========= \n1-Empregado \n2-Departamento \n3-Projecto \nOutro-Sair");
-			switch (op) {
-				case 1:
-					MenuEmpregado.exibir();
-					break;
-				case 2:
-					MenuDepartamento.exibir();
-					break;
-				case 3:
-					MenuProjecto.exibir();
-					break;
-				default:
-					DataBase.closeConnection();
-					IO.println("Encerrando o programa...");
-					break;
+			try {
+				switch (op) {
+					case 1:
+						MenuEmpregado.exibir();
+						break;
+					case 2:
+						MenuDepartamento.exibir();
+						break;
+					case 3:
+						MenuProjecto.exibir();
+						break;
+					default:
+						DataBase.closeConnection();
+						IO.println("Encerrando o programa...");
+						break;
+				}
+			}catch(DbException e){
+				IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
 			}
 		} while(op > 0 && op <= 3);
 	}

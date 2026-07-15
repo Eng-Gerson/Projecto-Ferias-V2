@@ -18,6 +18,7 @@ public class SubMenuDependente {
         int op;
         do {
             op = io.enterInt("----- Dependente ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Dependente \n5-Buscar Dependente por Empregado \n6-Actualizar \nOutro - Sair");
+            try{
             switch (op) {
                 case 1:
                     inserir();
@@ -40,6 +41,9 @@ public class SubMenuDependente {
                 default:
                     IO.println("Saindo...");
                     break;
+            }
+            }catch(DbException e){
+                IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
             }
         }while(op > 0 && op < 7);
     }
