@@ -20,6 +20,7 @@ public class SubMenuChefia {
         int op;
         do {
             op = io.enterInt("----- Chefia ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Chefe por Departamento \n5-Buscar Chefe por Empregado \n6-Actualizar \nOutro - Sair");
+            try{
             switch (op) {
                 case 1:
                     inserir();
@@ -42,6 +43,9 @@ public class SubMenuChefia {
                 default:
                     IO.println("Saindo...");
                     break;
+            }
+            }catch(DbException e){
+                IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
             }
         }while(op > 0 && op < 7);
     }

@@ -14,27 +14,32 @@ public class MenuEmpregado {
 		int op;
 		do {
 			op = io.enterInt("----- Empregado ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar por Código \n5-Actualizar \n6-Dependentes \nOutro - Sair");
-			switch (op) {
-				case 1:
-					inserir();
-					break;
-				case 2:
-					remover();
-					break;
-				case 3:
-					listar();
-					break;
-				case 4:
-					buscar();
-					break;
-				case 5:
-					actualizar();
-					break;
-				case 6:
-					SubMenuDependente.exibir(); break;
-				default:
-					IO.println("Saindo...");
-					break;
+			try {
+				switch (op) {
+					case 1:
+						inserir();
+						break;
+					case 2:
+						remover();
+						break;
+					case 3:
+						listar();
+						break;
+					case 4:
+						buscar();
+						break;
+					case 5:
+						actualizar();
+						break;
+					case 6:
+						SubMenuDependente.exibir();
+						break;
+					default:
+						IO.println("Saindo...");
+						break;
+				}
+			}catch(DbException e){
+				IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
 			}
 		}while(op > 0 && op < 7);
 	}

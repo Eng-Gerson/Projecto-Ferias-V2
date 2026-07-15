@@ -1,12 +1,11 @@
 package menu;
+import exception.DbException;
 import input.Input;
 import database.DepartamentoDAO;
 import model.Departamento;
 import java.util.ArrayList;
 import model.Empregado;
 import model.Projecto;
-
-import java.lang.Exception;
 
 public class MenuDepartamento {
     private static final Input io = new Input();
@@ -15,32 +14,38 @@ public class MenuDepartamento {
         int op;
         do {
             op = io.enterInt("------- MENU DEPARTAMENTO ------- \n1-Adicionar \n2-Remover \n3-Actualizar \n4-Listar \n5-Mostrar Funcionários \n6-Buscar por Código \n7-Mostrar Projectos \n8-Chefia \nOutro- Sair");
-            switch (op) {
-                case 1:
-                    inserir();
-                    break;
-                case 2:
-                    remover();
-                    break;
-                case 3:
-                    actualizar();
-                    break;
-                case 4:
-                    listar();
-                    break;
-                case 5:
-                    mostrarEmpregado();
-                    break;
-                case 6:
-                    buscar();
-                    break;
-                case 7:
-                    mostrarProjecto(); break;
-                case 8:
-                    SubMenuChefia.exibir(); break;
-                default:
-                    System.out.println("Saindo...");
-                    break;
+            try {
+                switch (op) {
+                    case 1:
+                        inserir();
+                        break;
+                    case 2:
+                        remover();
+                        break;
+                    case 3:
+                        actualizar();
+                        break;
+                    case 4:
+                        listar();
+                        break;
+                    case 5:
+                        mostrarEmpregado();
+                        break;
+                    case 6:
+                        buscar();
+                        break;
+                    case 7:
+                        mostrarProjecto();
+                        break;
+                    case 8:
+                        SubMenuChefia.exibir();
+                        break;
+                    default:
+                        System.out.println("Saindo...");
+                        break;
+                }
+            }catch(DbException e){
+                IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
             }
         }while(op > 0 && op < 9);
     }

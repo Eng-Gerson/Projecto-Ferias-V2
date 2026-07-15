@@ -18,6 +18,7 @@ public class SubMenuDependente {
         int op;
         do {
             op = io.enterInt("----- Dependente ----- \n1-Adicionar \n2-Remover \n3-Listar \n4-Buscar Dependente \n5-Buscar Dependente por Empregado \n6-Actualizar \nOutro - Sair");
+            try{
             switch (op) {
                 case 1:
                     inserir();
@@ -41,6 +42,9 @@ public class SubMenuDependente {
                     IO.println("Saindo...");
                     break;
             }
+            }catch(DbException e){
+                IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
+            }
         }while(op > 0 && op < 7);
     }
 
@@ -54,6 +58,10 @@ public class SubMenuDependente {
         Date data = io.enterDate("Insira a data de Nascimento  \"dd/MM/aaaa\"");
         String parente = io.enterString("Insira o parentesco");
         Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
+        if(empreg == null){
+            IO.println("Esse empregado não existe");
+            return;
+        }
         dep.add(new Dependente(nome,sexo,data,parente,empreg));
     }
     private static void listar()throws DbException {
@@ -86,6 +94,10 @@ public class SubMenuDependente {
             Date data = io.enterDate("Insira a data de Nascimento  \"dd/MM/aaaa\"");
             String parente = io.enterString("Insira o parentesco");
             Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
+            if(empreg == null){
+                IO.println("Esse empregado não existe");
+                return;
+            }
             dep.update(id,new Dependente(nome,sexo,data,parente,empreg));
         } else {
             IO.println("Não existe dependente com esse código");

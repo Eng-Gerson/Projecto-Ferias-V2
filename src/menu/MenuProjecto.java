@@ -1,4 +1,5 @@
 package menu;
+import exception.DbException;
 import input.Input;
 import model.Projecto;
 import model.Departamento;
@@ -16,14 +17,30 @@ public class MenuProjecto {
         int op;
         do {
         op = io.enterInt("-------- MENU PROJECTO -------- \n1-Criar Projecto \n2-Remover \n3-Listar Projectos \n4-Actualizar Projecto \n5-Buscar pelo ID \nOutro-Sair");
-            switch(op){
-             case 1: inserir();break;
-             case 2: remover();break;
-             case 3: listar();break;
-             case 4: actualizar();break;
-             case 5: buscar();break;
-             default: IO.println("Saindo..."); break;
+        try {
+            switch (op) {
+                case 1:
+                    inserir();
+                    break;
+                case 2:
+                    remover();
+                    break;
+                case 3:
+                    listar();
+                    break;
+                case 4:
+                    actualizar();
+                    break;
+                case 5:
+                    buscar();
+                    break;
+                default:
+                    IO.println("Saindo...");
+                    break;
             }
+        }catch(DbException e){
+            IO.println("Ocorreu um erro "+ "\n"+ e.getMessage()+"\nTente reiniciar o programa.");
+        }
         } while(op > 0 && op < 6);
     }
 
