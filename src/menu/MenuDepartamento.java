@@ -47,8 +47,8 @@ public class MenuDepartamento {
 
     private static void buscar() throws Exception {
         int choice = io.enterInt("Insira o número do Departamento");
-        if(dep.searchID(choice) != null) {
-            Departamento departamento = dep.searchID(choice);
+        Departamento departamento = dep.searchID(choice);
+        if(departamento != null) {
             IO.println("CodDepartamento: " + departamento.getCodDepartamento() + " Nome: " + departamento.getNome());
         } else {
             IO.println("Departamento com esse código não existe");
