@@ -7,7 +7,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 public class DataBase {
-	public static Connection conn = null;
+	private static Connection conn = null;
 	public static Connection getConnection()throws DbException{
 		if(conn == null){
 			try {
