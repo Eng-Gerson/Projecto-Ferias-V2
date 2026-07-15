@@ -23,7 +23,7 @@ public class Departamento {
 
 	@Override
 	public String toString() {
-		return " codDepartamento: " + codDepartamento + " nome:" + nome;
+		return " Código do Departamento: " + codDepartamento + " Nome:" + nome;
 	}
 	
 	

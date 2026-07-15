@@ -105,7 +105,7 @@ public class MenuDepartamento {
             IO.println("Das duas uma, ou o departamento não existe ou não tem projectos associados");
         } else {
             for (Projecto p : projectos) {
-                System.out.println("CodProjecto: "+p.getCodProjecto()+ "Localização: "+p.getLocalizacao());
+                System.out.println("CodProjecto: "+p.getCodProjecto()+ " Localização: "+p.getLocalizacao());
             }
         }
     }
