@@ -30,8 +30,8 @@ public class Chefia {
 
     @Override
     public String toString(){
-        return "Empregado: "+empregado.getNome()+" "+empregado.getApelido()+" Código: "+empregado.getCodEmpregado()
-                +" Departamento: "+departamento.getNome()+" Código: "+departamento.getCodDepartamento()
+        return "Departamento: "+departamento.getNome()+" Código: "+departamento.getCodDepartamento()
+        +" Empregado: "+empregado.getNome()+" "+empregado.getApelido()+" Código: "+empregado.getCodEmpregado()
                 +" Designacao: "+designacao+" Data de Início: "+dataInicio;
     }
 }

@@ -25,7 +25,7 @@ public class ChefiaDAO {
     }
     public ArrayList<Chefia> list()throws DbException{
         ArrayList<Chefia> lista = new ArrayList<>();
-        String sql = "select * from chefia ";
+        String sql = "select * from chefia order by codDepartamento";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql); ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
                 lista.add(new Chefia(emp.searchID(rs.getInt("codEmpregado")),dep.searchID(rs.getInt("codDepartamento")),rs.getDate("dataInicio"), rs.getString("designacao")));
@@ -36,7 +36,7 @@ public class ChefiaDAO {
         return lista;
     }
     public Chefia searchByDepartamento(int id)throws DbException{
-        String sql = "select * from chefia where codDepartamento = ?";
+        String sql = "select * from chefia where codDepartamento = ? ";
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)
         ){
             stmt.setInt(1,id);
