@@ -91,8 +91,8 @@ CREATE TABLE empregadoprojecto (
   codEmpregado INT(11) NOT NULL,
   codProjecto  INT(11) NOT NULL,
   nrHoras      INT(11) NOT NULL,
-  UNIQUE INDEX codEmpregado_UNIQUE (codEmpregado),
-  UNIQUE INDEX codProjecto_UNIQUE (codProjecto),
+  INDEX codEmpregado_UNIQUE (codEmpregado),
+  INDEX codProjecto_UNIQUE (codProjecto),
   CONSTRAINT empregadoprojecto_ibfk_1
     FOREIGN KEY (codEmpregado) REFERENCES empregado (codEmpregado)
     ON DELETE CASCADE ON UPDATE CASCADE,

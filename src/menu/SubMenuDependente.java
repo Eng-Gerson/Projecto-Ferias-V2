@@ -90,7 +90,7 @@ public class SubMenuDependente {
         int id = io.enterInt("Insira o código do dependente a ser actualizado");
         if(dep.searchID(id) != null) {
             String nome = io.enterString("Insira o 1º nome");
-            String sexo = io.enterString("Insira o sexo");
+            String sexo = String.valueOf(io.enterChar("Insira o sexo"));
             Date data = io.enterDate("Insira a data de Nascimento  \"dd/MM/aaaa\"");
             String parente = io.enterString("Insira o parentesco");
             Empregado empreg = emp.searchID(io.enterInt("Insira o código do empregado"));
