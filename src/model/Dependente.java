@@ -11,14 +11,14 @@ public class Dependente {
     public Dependente(int codDependente, String nome, String sexo, Date dataNascimento, String parentesco, Empregado empregado) {
         this.codDependente = codDependente;
         this.nome = nome;
-        this.sexo = String.valueOf(sexo.charAt(0));
+        this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.parentesco = parentesco;
         this.empregado = empregado;
     }
     public Dependente(String nome, String sexo, Date dataNascimento, String parentesco, Empregado empregado) {
         this.nome = nome;
-        this.sexo = String.valueOf(sexo.charAt(0));
+        this.sexo = sexo;
         this.dataNascimento = dataNascimento;
         this.parentesco = parentesco;
         this.empregado = empregado;

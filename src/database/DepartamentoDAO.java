@@ -78,11 +78,12 @@ public class DepartamentoDAO {
     public ArrayList<Empregado> listaEmpregado(int index)throws DbException{
         ArrayList<Empregado> emp = new ArrayList<>();
         String sql = "select * from empregado where codDepartamento = ?";
+        Departamento departamento = searchID(index);
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()){
             while(rs.next()){
-                emp.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"), searchID(rs.getInt("codDepartamento"))));
+                emp.add(new Empregado(rs.getInt("codEmpregado"),rs.getString("nome"),rs.getString("apelido"),rs.getDouble("salario"),rs.getDate("dataNascimento"),departamento));
             }
             }
         }catch(SQLException s){
@@ -93,11 +94,12 @@ public class DepartamentoDAO {
     public ArrayList<Projecto> listaProjecto(int index)throws DbException{
         ArrayList<Projecto> proj = new ArrayList<>();
         String sql = "select * from projecto where codDepartamento = ?";
+        Departamento departamento = searchID(index);
         try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
             stmt.setInt(1,index);
             try(ResultSet rs = stmt.executeQuery()){
                 while(rs.next()){
-                    proj.add(new Projecto(rs.getInt("codProjecto"),rs.getDate("dataInicio"),rs.getString("localizacao"),searchID(rs.getInt("codDepartamento"))));
+                    proj.add(new Projecto(rs.getInt("codProjecto"),rs.getDate("dataInicio"),rs.getString("localizacao"),departamento));
                 }
             }
         }catch(SQLException s){

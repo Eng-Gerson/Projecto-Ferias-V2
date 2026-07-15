@@ -32,31 +32,15 @@ public class Input {
           }
      }
 
-     public float enterFloat(String msg) throws IOException {
-          while (true) {
-               try {
-                    System.out.println(msg);
-                   return Float.parseFloat(sc.readLine());
-               } catch (NumberFormatException n) {
-                    System.out.println("Erro, não pode estar vazio e deve ser um número.\n" + n.getMessage());
-               }
-          }
-     }
-
-     public byte enterByte(String msg) throws IOException {
-          System.out.println(msg);
-         return Byte.parseByte(sc.readLine());
-     }
-
-     public long enterLong(String msg) throws IOException {
-          System.out.println(msg);
-         return Long.parseLong(sc.readLine());
-     }
-
      public char enterChar(String msg) throws IOException {
-          System.out.println(msg);
-          String enter = sc.readLine();
-         return enter.charAt(0);
+          while(true) {
+               System.out.println(msg);
+               String enter = sc.readLine();
+               if(enter != null && !enter.isBlank() && enter.charAt(0) != 32) {
+                    return enter.toUpperCase().charAt(0);
+               }
+               System.out.println("Erro,não pode estar vazio");
+          }
      }
 
      public double enterDouble(String msg) throws IOException {
@@ -68,11 +52,6 @@ public class Input {
                     System.out.println("Erro, não pode estar vazio e deve ser um número.\n" + n.getMessage());
                }
           }
-     }
-
-     public boolean enterBoolean(String msg) throws IOException {
-          System.out.println(msg);
-         return Boolean.parseBoolean(sc.readLine());
      }
 
      public Date enterDate(String msg) throws IOException {
@@ -87,7 +66,7 @@ public class Input {
                     }
                     System.out.println("Insira novamente, essa data é absurda");
                } catch (DateTimeParseException e) {
-                    System.out.println("Data inválida: \n"+e.getMessage());
+                    System.out.println("Data inválida");
                }
           }
      }

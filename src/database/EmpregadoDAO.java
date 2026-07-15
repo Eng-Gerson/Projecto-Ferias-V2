@@ -8,7 +8,7 @@ import model.*;
 
 public class EmpregadoDAO{
 	private static final DepartamentoDAO dep = new DepartamentoDAO();
-	public void add(Empregado emp)throws Exception{
+	public void add(Empregado emp)throws DbException{
 		String sql = "INSERT INTO empregado(nome,apelido,salario,dataNascimento,codDepartamento) VALUES (?,?,?,?,?) ";
 		try(PreparedStatement stmt = DataBase.getConnection().prepareStatement(sql)){
 			stmt.setString(1, emp.getNome());
@@ -20,8 +20,6 @@ public class EmpregadoDAO{
 			IO.println("Empregado inserido com sucesso!");
 		}catch(SQLException s){
 			throw new DbException(s.getMessage());
-		}catch(Exception e){
-			throw new DbException("Erro: "+e.getMessage());
 		}
 		
 	}
@@ -83,9 +81,7 @@ public class EmpregadoDAO{
 			}
 		}catch(SQLException s){
 			throw new DbException(s.getMessage());
-		}catch(Exception e){
-			throw new DbException("Erro: "+e.getMessage());
-		}	
+		}
 	}
 	
 }
