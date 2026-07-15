@@ -50,7 +50,12 @@ public class MenuEmpregado {
 		double salario = io.enterDouble("Insira o salário");
 		Date data = io.enterDate("Insira a data de Nascimento \"dd/MM/aaaa\"");
 		Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
+		if(dpt == null){
+			IO.println("Esse departamento não existe");
+			return;
+		}
 		emp.add(new Empregado(nome,apelido,salario,data,dpt));
+
 		
 	}
 
@@ -78,6 +83,10 @@ public class MenuEmpregado {
 			double salario = io.enterDouble("Insira o salário");
 			Date data = io.enterDate("Insira a data de Nascimento \"dd/MM/aaaa\"");
 			Departamento dpt = dep.searchID(io.enterInt("Insira o código do departamento"));
+			if(dpt == null){
+				IO.println("Esse departamento não existe");
+				return;
+			}
 			emp.update(id, new Empregado(nome, apelido, salario, data, dpt));
 		} else {
 			IO.println("Não existe empregado com esse código");

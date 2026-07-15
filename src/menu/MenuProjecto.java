@@ -1,6 +1,7 @@
 package menu;
 import input.Input;
 import model.Projecto;
+import model.Departamento;
 import database.ProjectoDAO;
 import java.util.ArrayList;
 import database.DepartamentoDAO;
@@ -32,7 +33,12 @@ public class MenuProjecto {
             String loc = io.enterString("Insira a localização do projecto");
             Date data = io.enterDate("Insira a data de Inicio \"dd/MM/aaaa\"");
             int codDep = io.enterInt("Insira o código do departamento");
-            proj.update(new Projecto(data, loc, dep.searchID(codDep)), index);
+            Departamento dpt = dep.searchID(codDep);
+            if(dpt == null){
+                IO.println("Esse departamento não existe");
+                return;
+            }
+            proj.update(new Projecto(data, loc, dpt), index);
         } else {
             IO.println("Não existe projecto com esse código");
         }
@@ -64,6 +70,11 @@ public class MenuProjecto {
         String loc = io.enterString("Insira a localização do projecto");
         Date data = io.enterDate("Insira a data de Inicio \"dd/MM/aaaa\"");
         int codDep = io.enterInt("Insira o código do departamento");
-        proj.add(new Projecto(data,loc,dep.searchID(codDep)));
+        Departamento dpt = dep.searchID(codDep);
+        if(dpt == null){
+            IO.println("Esse departamento não existe");
+            return;
+        }
+        proj.add(new Projecto(data,loc,dpt));
     }
 }
