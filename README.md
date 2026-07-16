@@ -4,6 +4,7 @@ O primeiro repositório foi feito usando NetBeans se você usa IntelliJ copie es
 O projecto tem finalidade academica. 
 Algumas tabelas que estão nos ficheiros SQL não serão implementadas, o foco era as classes principais a saber Departamento, Empregado, Projecto, Chefia e Dependente.
 E 80% do projecto não possui validação.
+- Repositório Original: https://github.com/Eng-Gerson/Projecto-Ferias
 
 ## Requisitos
 1. IntelliJ Idea versão 2026.1.3 +
